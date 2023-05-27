@@ -35,7 +35,7 @@ const LeftMenuLinksSection = ({
         setSearch={setSearch}
         search={search}
       />
-      <LeftMenuListLink shrink={shrink}>
+      <LeftMenuListLink section={section} shrink={shrink}>
         {filteredList.length > 0 ? (
           filteredList.map((link, index) => (
             <LeftMenuLink

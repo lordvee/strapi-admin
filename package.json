@@ -1,10 +1,10 @@
 {
-  "name": "strapi-admin",
-  "version": "3.6.8",
+  "name": "@punch-in/strapi-admin",
+  "version": "1.0.2",
   "description": "Strapi Admin",
   "repository": {
     "type": "git",
-    "url": "git://github.com/strapi/strapi.git"
+    "url": "git://github.com/lordvee/strapi-admin.git"
   },
   "scripts": {
     "test": "echo \"no tests yet\"",
@@ -114,25 +114,24 @@
     "webpackbar": "^4.0.0",
     "yup": "^0.32.9"
   },
-  "author": {
-    "name": "Strapi",
-    "email": "",
-    "url": ""
-  },
+  "author": "Strapi",
   "maintainers": [
-    {
-      "name": "Strapi",
-      "email": "",
-      "url": ""
-    }
+    "Strapi"
   ],
   "engines": {
     "node": ">=10.16.0 <=14.x.x",
     "npm": ">=6.0.0"
   },
   "license": "SEE LICENSE IN LICENSE",
-  "gitHead": "231263a3535658bab1e9492c6aaaed8692d62a53",
   "devDependencies": {
     "webpack-bundle-analyzer": "4.4.0"
+  },
+  "bugs": {
+    "url": "https://github.com/strapi/strapi/issues"
+  },
+  "homepage": "https://github.com/strapi/strapi#readme",
+  "directories": {
+    "doc": "doc",
+    "test": "tests"
   }
 }

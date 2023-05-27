@@ -1,7 +1,7 @@
 {
   "collectionType": {
     "id": "app.components.LeftMenuLinkContainer.collectionTypes",
-    "defaultMessage": "Collection Types"
+    "defaultMessage": "Main"
   },
   "singleType": {
     "id": "app.components.LeftMenuLinkContainer.singleTypes",

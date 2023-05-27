@@ -16,12 +16,12 @@ function LeftMenuFooter({ version }) {
   return (
     <Wrapper>
       <div className="poweredBy">
-        <A key="website" href="https://strapi.io" target="_blank" rel="noopener noreferrer">
-          Strapi
+        <A key="website" href="https://www.punch-in.co.uk" target="_blank" rel="noopener noreferrer">
+          Punch-in
         </A>
         &nbsp;
         <A
-          href={`https://github.com/strapi/strapi/releases/tag/v${version}`}
+          href={`"https://www.punch-in.co.uk"`}
           key="github"
           target="_blank"
           rel="noopener noreferrer"
@@ -29,8 +29,8 @@ function LeftMenuFooter({ version }) {
           v{version}
         </A>
         &nbsp;
-        <A href="https://strapi.io" target="_blank" rel="noopener noreferrer">
-          — {projectType} Edition
+        <A href="https://www.punch-in.co.uk" target="_blank" rel="noopener noreferrer">
+          — General Edition
         </A>
       </div>
     </Wrapper>

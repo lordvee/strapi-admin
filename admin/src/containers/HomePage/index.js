@@ -19,45 +19,29 @@ import SocialLink from './SocialLink';
 const FIRST_BLOCK_LINKS = [
   {
     link:
-      'https://strapi.io/documentation/developer-docs/latest/getting-started/quick-start.html#_4-create-a-category-content-type',
+      'https://www.punch-in.co.uk/#docs',
     contentId: 'app.components.BlockLink.documentation.content',
     titleId: 'app.components.BlockLink.documentation',
   },
   {
-    link: 'https://github.com/strapi/foodadvisor',
-    contentId: 'app.components.BlockLink.code.content',
-    titleId: 'app.components.BlockLink.code',
+    link: 'https://www.punch-in.co.uk/faq',
+    contentId: 'app.components.BlockLink.documentation.faq',
+    titleId: 'app.components.BlockLink.faq',
   },
 ];
 
 const SOCIAL_LINKS = [
   {
-    name: 'GitHub',
-    link: 'https://github.com/strapi/strapi/',
+    name: 'LinkedIn',
+    link: 'https://www.linkedin.com/company/punch-in-uk/',
   },
   {
-    name: 'Discord',
-    link: 'https://discord.strapi.io/',
-  },
-  {
-    name: 'Reddit',
-    link: 'https://www.reddit.com/r/Strapi/',
-  },
-  {
-    name: 'Twitter',
-    link: 'https://twitter.com/strapijs',
-  },
-  {
-    name: 'Blog',
-    link: 'https://strapi.io/blog',
-  },
-  {
-    name: 'Forum',
-    link: 'https://forum.strapi.io',
+    name: 'Facebook',
+    link: 'https://www.facebook.com/punch.in.uk',
   },
   {
     name: 'Careers',
-    link: 'https://strapi.io/careers',
+    link: 'https://www.punch-in.co.uk/careers',
   },
 ];
 
@@ -152,30 +136,6 @@ const HomePage = ({ history: { push } }) => {
                   }}
                 </FormattedMessage>
               )}
-              {hasAlreadyCreatedContentTypes && (
-                <div style={{ marginTop: isLoading ? 60 : 50 }}>
-                  {posts.map((post, index) => (
-                    <BlogPost
-                      {...post}
-                      key={post.link}
-                      isFirst={index === 0}
-                      isLoading={isLoading}
-                      error={error}
-                    />
-                  ))}
-                </div>
-              )}
-              <FormattedMessage id={linkProps.id}>
-                {msg => (
-                  <ALink
-                    rel="noopener noreferrer"
-                    {...linkProps}
-                    style={{ verticalAlign: ' bottom', marginBottom: 5 }}
-                  >
-                    {msg}
-                  </ALink>
-                )}
-              </FormattedMessage>
               <Separator style={{ marginTop: 37, marginBottom: 36 }} />
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 {FIRST_BLOCK_LINKS.map((data, index) => {
