@@ -8,7 +8,7 @@ const WebpackDevServer = require('webpack-dev-server');
 const chalk = require('chalk');
 const chokidar = require('chokidar');
 // eslint-disable-next-line node/no-extraneous-require
-const hasEE = require('strapi/lib/utils/ee');
+const hasEE = require('@punch-in/strapi/lib/utils/ee');
 const getWebpackConfig = require('./webpack.config.js');
 
 const getPkgPath = name => path.dirname(require.resolve(`${name}/package.json`));
@@ -154,7 +154,7 @@ async function copyPlugin(name, dest) {
 }
 
 async function copyAdmin(dest) {
-  const adminPath = getPkgPath('strapi-admin');
+  const adminPath = getPkgPath('@punch-in/strapi-admin');
 
   // TODO copy ee folders for plugins
   await fs.copy(path.resolve(adminPath, 'ee', 'admin'), path.resolve(dest, 'ee', 'admin'));
@@ -181,7 +181,7 @@ async function createCacheDir(dir) {
 
   const pluginsToCopy = Object.keys(pkgJSON.dependencies).filter(
     dep =>
-      dep.startsWith('strapi-plugin') &&
+      dep.includes('strapi-plugin') &&
       fs.existsSync(path.resolve(getPkgPath(dep), 'admin', 'src', 'index.js'))
   );
 

@@ -37,6 +37,7 @@
     "@fortawesome/free-brands-svg-icons": "^5.15.3",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/react-fontawesome": "^0.1.14",
+    "@punch-in/strapi": "file:/webapps/punch-in-repo/strapi",
     "autoprefixer": "^9.8.6",
     "axios": "^0.21.1",
     "babel-loader": "^8.1.0",
