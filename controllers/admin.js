@@ -28,11 +28,12 @@ module.exports = {
     const currentEnvironment = strapi.app.env;
     const autoReload = strapi.config.get('autoReload', false);
     const strapiVersion = strapi.config.get('info.strapi', null);
+    const maxUsers = strapi.config.get('info.maxUsers', 100);
     const nodeVersion = process.version;
     const communityEdition = !strapi.EE;
 
     return {
-      data: { currentEnvironment, autoReload, strapiVersion, nodeVersion, communityEdition },
+      data: { currentEnvironment, autoReload, strapiVersion, nodeVersion, maxUsers, communityEdition },
     };
   },
 

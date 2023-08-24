@@ -166,7 +166,7 @@ window.strapi = Object.assign(window.strapi || {}, {
   node: MODE || 'host',
   env: NODE_ENV,
   remoteURL,
-  backendURL: BACKEND_URL === '/' ? window.location.origin : BACKEND_URL,
+  backendURL: 'https://' + window.location.hostname.replace('-admin',''),
   notification: {
     // New notification api
     toggle: config => {

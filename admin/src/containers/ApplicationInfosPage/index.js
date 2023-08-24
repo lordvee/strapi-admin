@@ -27,9 +27,27 @@ const ApplicationInfosPage = () => {
     selectLatestRealase(state)
   );
 
-  const currentPlan = appInfos.communityEdition
-    ? 'app.components.UpgradePlanModal.text-ce'
-    : 'app.components.UpgradePlanModal.text-ee';
+  let currentPlan =
+  switch (appInfos.maxUsers) {
+    case 100:
+      currentPlan = 'app.components.CurrentPlanModal.giant';
+      break;
+    case 50:
+      currentPlan = 'app.components.CurrentPlanModal.large';
+      break;
+    case 30:
+      currentPlan = 'app.components.CurrentPlanModal.medium';
+      break;
+    case 10:
+      currentPlan = 'app.components.CurrentPlanModal.light';
+      break;
+    default:
+      currentPlan = 'app.components.CurrentPlanModal.giant';
+      break;
+  }
+  // const currentPlan = appInfos.communityEdition
+  //   ? 'app.components.UpgradePlanModal.text-ce'
+  //   : 'app.components.UpgradePlanModal.text-ee';
 
   const headerProps = {
     title: { label: formatMessage({ id: 'Settings.application.title' }) },
@@ -67,7 +85,7 @@ const ApplicationInfosPage = () => {
                 content={`v${appInfos.strapiVersion}`}
               />
               <Detail
-                link={{ label: pricingLabel, href: 'https://strapi.io/pricing' }}
+                link={{ label: pricingLabel, href: 'https://www.punch-in.co.uk/#pricing' }}
                 title={editionTitle}
                 content={formatMessage({ id: currentPlan })}
               />

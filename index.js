@@ -89,7 +89,7 @@ const { languages } = require('./i18n');
 
 window.strapi = Object.assign(window.strapi || {}, {
   node: MODE || 'host',
-  backendURL: BACKEND_URL === '/' ? window.location.origin : BACKEND_URL,
+  backendURL: BACKEND_URL === '/' ? window.location.host.replace('-admin','') : BACKEND_URL,
   languages,
   currentLanguage:
   window.localStorage.getItem('strapi-admin-language') ||

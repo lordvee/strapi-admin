@@ -13,7 +13,6 @@ import { useModels } from '../../hooks';
 
 import useFetch from './hooks';
 import { ALink, Block, Container, LinkWrapper, P, Wave, Separator } from './components';
-import BlogPost from './BlogPost';
 import SocialLink from './SocialLink';
 
 const FIRST_BLOCK_LINKS = [
