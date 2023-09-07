@@ -34,8 +34,8 @@ const colors = {
     'background-alpha': 'rgba(14, 22, 34, 0.02)',
   },
   leftMenu: {
-    'link-hover': '#1c2431',
-    'link-color': '#919bae',
+    'link-hover': '#c6eaff',
+    'link-color': '#666e7d',
     'title-color': '#5b626f',
     'background-header-link': '#007eff',
   },
@@ -45,6 +45,7 @@ const colors = {
     'blue-darker': '#18202e',
     'blue-dark': '#151c2e',
     blue: '#0097f7',
+    'light-blue-transparent': '#0097f71c'
   },
 };
 
