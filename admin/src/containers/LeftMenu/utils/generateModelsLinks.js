@@ -30,7 +30,7 @@ const generateLinks = (links, type, configurations = []) => {
       }
 
       return {
-        icon: 'circle',
+        icon: link.icon ?  link.icon : 'circle',
         destination: `/plugins/content-manager/${link.kind}/${link.uid}`,
         isDisplayed: true,
         label: link.info.label,

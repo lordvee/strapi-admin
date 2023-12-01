@@ -43,7 +43,7 @@ export function PluginDispatcher(props) {
 
   return (
     <div>
-      <PageTitle title={`Strapi - ${name}`} />
+      <PageTitle title={`Punch-in - ${name}`} />
       <ErrorBoundary FallbackComponent={ErrorFallback}>
         <PluginEntryComponent
           {...props}

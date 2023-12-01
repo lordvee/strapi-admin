@@ -35,6 +35,7 @@ const colors = {
   },
   leftMenu: {
     'link-hover': '#c6eaff',
+    'link-visited': '#00458f',
     'link-color': '#666e7d',
     'title-color': '#5b626f',
     'background-header-link': '#007eff',

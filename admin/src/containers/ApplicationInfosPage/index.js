@@ -27,7 +27,7 @@ const ApplicationInfosPage = () => {
     selectLatestRealase(state)
   );
 
-  let currentPlan =
+  let currentPlan;
   switch (appInfos.maxUsers) {
     case 100:
       currentPlan = 'app.components.CurrentPlanModal.giant';

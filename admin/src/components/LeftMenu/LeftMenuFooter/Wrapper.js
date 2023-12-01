@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-
+//background: ${props => props.theme.main.colors.strapi['blue-darker']};
 const Wrapper = styled.div`
   position: absolute;
   width: 100%;
-  background: ${props => props.theme.main.colors.strapi['blue-darker']};
+  background: rgb(0, 126, 255);
   bottom: 0;
   .poweredBy {
     width: 100%;
@@ -18,13 +18,14 @@ const Wrapper = styled.div`
     font-weight: 400;
     letter-spacing: 0.05rem;
     vertical-align: middle;
-    color: ${({ theme }) => theme.main.colors.strapi['gray-light']};
+    color: ${({ theme }) => theme.main.colors['white']};
   }
 `;
 
 const A = styled.a`
+  color: #FFF;
   &:hover {
-    color: #007bff;
+    color: rgb(255, 227, 0);
     text-decoration: underline;
   }
 `;

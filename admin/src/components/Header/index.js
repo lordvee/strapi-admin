@@ -12,11 +12,11 @@ const Header = styled.div`
   height: ${props => props.theme.main.sizes.header.height};
 
   position: fixed;
-  z-index: 1040;
+  z-index: -10;
   left: ${props => props.theme.main.sizes.leftMenu.width};
 
   box-shadow: 0 1px 2px 0 rgba(40, 42, 49, 0.16);
-  background-color: ${props => props.theme.main.colors.white};
+  background-color: ${props => props.theme.main.colors.leftMenu['background-header-link']};};
 
   line-height: ${props => props.theme.main.sizes.header.height};
 `;

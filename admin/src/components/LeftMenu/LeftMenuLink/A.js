@@ -31,7 +31,7 @@ const A = styled.a`
   }
 
   &.linkActive {
-    color: white !important;
+    color: ${props => props.theme.main.colors.leftMenu['link-visited']}; !important;
     border-left: 0.3rem solid ${props => props.theme.main.colors.strapi.blue};
   }
 `;

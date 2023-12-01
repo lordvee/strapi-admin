@@ -24,11 +24,13 @@ const Wrapper = styled.div`
       text-align: right;
       cursor: pointer;
       transition: background 0.2s ease-out;
+      background-color: #007eff;
+      color: #fff;
 
       &:hover,
       &:focus,
       &:active {
-        color: #333740;
+        color: #007eff;
         background-color: #fafafb !important;
         z-index: 9;
       }

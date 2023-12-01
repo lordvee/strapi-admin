@@ -80,6 +80,9 @@ async function build({ dir, env, options, optimize }) {
 }
 
 async function createPluginsJs(plugins, localPlugins, dest) {
+  // console.log(plugins);
+  // console.log('============');
+  // console.log(localPlugins);
   const content = `
 const injectReducer = require('./utils/injectReducer').default;
 const injectSaga = require('./utils/injectSaga').default;
@@ -105,8 +108,8 @@ window.strapi = Object.assign(window.strapi || {}, {
 module.exports = {
   ${plugins
     .map(name => {
-      const shortName = name.replace(/^strapi-plugin-/i, '');
-      const req = `require('../../plugins/${name}/admin/src').default`;
+      const shortName = name.replace(/^(strapi-plugin-|@punch-in\/strapi-plugin-)/i, '');
+      const req = `require('../../plugins/${name.replace('@punch-in/','')}/admin/src').default`;
       return `'${shortName}': ${req},`;
     })
     .join('\n')}
@@ -135,7 +138,7 @@ async function copyPlugin(name, dest) {
   const pkgFilePath = getPkgPath(name);
 
   const resolveDepPath = (...args) => path.resolve(pkgFilePath, ...args);
-  const resolveDest = (...args) => path.resolve(dest, 'plugins', name, ...args);
+  const resolveDest = (...args) => path.resolve(dest, 'plugins', name.replace('@punch-in/',''), ...args);
 
   const copy = (...args) => {
     return fs.copy(resolveDepPath(...args), resolveDest(...args));

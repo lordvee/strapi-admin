@@ -47,6 +47,16 @@ const LeftMenu = ({ shouldUpdateStrapi, version, plugins, setUpdateMenu }) => {
       <Loader show={isLoading} />
       <LeftMenuHeader />
       <LinksContainer>
+        {pluginsSectionLinks.length > 0 && (
+          <LeftMenuLinksSection
+            section="plugins"
+            name="plugins"
+            links={pluginsSectionLinks}
+            location={location}
+            searchable={false}
+            emptyLinksListMessage="app.components.LeftMenuLinkContainer.noPluginsInstalled"
+          />
+        )}
         {filteredCollectionTypeLinks.length > 0 && (
           <LeftMenuLinksSection
             section="collectionType"
@@ -66,16 +76,6 @@ const LeftMenu = ({ shouldUpdateStrapi, version, plugins, setUpdateMenu }) => {
           />
         )}
 
-        {pluginsSectionLinks.length > 0 && (
-          <LeftMenuLinksSection
-            section="plugins"
-            name="plugins"
-            links={pluginsSectionLinks}
-            location={location}
-            searchable={false}
-            emptyLinksListMessage="app.components.LeftMenuLinkContainer.noPluginsInstalled"
-          />
-        )}
         {generalSectionLinks.length > 0 && (
           <LeftMenuLinksSection
             section="general"

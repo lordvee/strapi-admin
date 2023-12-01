@@ -3,11 +3,11 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
   margin: auto;
   width: 41.6rem;
-  padding: 20px 30px 25px 30px;
-  border-radius: ${({ theme }) => theme.main.sizes.borderRadius};
-  border-top: 2px solid ${({ theme }) => theme.main.colors.mediumBlue};
-  background-color: ${({ theme }) => theme.main.colors.white};
-  box-shadow: 0 2px 4px 0 ${({ theme }) => theme.main.colors.darkGrey};
+  padding: 20px 30px 25px;
+  border-radius: 2px;
+  border-top: 2px solid rgb(183 219 255);
+  background-color: rgb(255, 255, 255);
+  box-shadow: rgb(181 193 213) 3px 5px 4px 2px;
 `;
 
 export default Wrapper;

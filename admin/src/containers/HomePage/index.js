@@ -24,7 +24,7 @@ const FIRST_BLOCK_LINKS = [
   },
   {
     link: 'https://www.punch-in.co.uk/faq',
-    contentId: 'app.components.BlockLink.documentation.faq',
+    contentId: 'app.components.BlockLink.faq.content',
     titleId: 'app.components.BlockLink.faq',
   },
 ];
@@ -73,15 +73,7 @@ const HomePage = ({ history: { push } }) => {
     ? 'HomePage.greetings'
     : 'app.components.HomePage.welcome';
   const username = get(auth.getUserInfo(), 'firstname', '');
-  const linkProps = hasAlreadyCreatedContentTypes
-    ? {
-        id: 'app.components.HomePage.button.blog',
-        href: 'https://strapi.io/blog/',
-        onClick: () => {},
-        type: 'blog',
-        target: '_blank',
-      }
-    : {
+  const linkProps = {
         id: 'app.components.HomePage.create',
         href: '',
         onClick: handleClick,
@@ -160,17 +152,6 @@ const HomePage = ({ history: { push } }) => {
               <FormattedMessage id="HomePage.community">{msg => <h2>{msg}</h2>}</FormattedMessage>
               <FormattedMessage id="app.components.HomePage.community.content">
                 {content => <P style={{ marginTop: 7, marginBottom: 0 }}>{content}</P>}
-              </FormattedMessage>
-              <FormattedMessage id="HomePage.roadmap">
-                {msg => (
-                  <ALink
-                    rel="noopener noreferrer"
-                    href="https://portal.productboard.com/strapi/1-public-roadmap/tabs/2-under-consideration"
-                    target="_blank"
-                  >
-                    {msg}
-                  </ALink>
-                )}
               </FormattedMessage>
 
               <Separator style={{ marginTop: 18 }} />

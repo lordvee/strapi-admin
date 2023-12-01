@@ -45,12 +45,12 @@ function appReducer(state = initialState, action) {
         return null;
       });
     case GET_INFOS_DATA_SUCCEEDED: {
-      if (action.data.strapiVersion !== state.get('strapiVersion')) {
-        console.error(
-          `It seems that the built version ${packageVersion} is different than your project's one (${action.data.strapiVersion})`
-        );
-        console.error('Please delete your `.cache` and `build` folders and restart your app');
-      }
+      // if (action.data.strapiVersion !== state.get('strapiVersion')) {
+      //   console.error(
+      //     `It seems that the built version ${packageVersion} is different than your project's one (${action.data.strapiVersion})`
+      //   );
+      //   console.error('Please delete your `.cache` and `build` folders and restart your app');
+      // }
 
       return (
         state
