@@ -10,9 +10,10 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { bindActionCreators, compose } from 'redux';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Link } from 'react-router-dom';
 import { injectIntl } from 'react-intl';
 import { isEmpty } from 'lodash';
+
 // Components from strapi-helper-plugin
 import {
   difference,
@@ -263,10 +264,12 @@ export class Admin extends React.Component {
             />
             <NavTopRightWrapper>
               {/* Injection zone not ready yet */}
+              <Link to="/" className="leftMenuHeaderLink">
+                <span className="projectName" />
+              </Link>
               <Logout />
             </NavTopRightWrapper>
             <div className="adminPageRightWrapper">
-              <Header />
               <Content>
                 <Switch>
                   <Route path="/" render={props => this.renderRoute(props, HomePage)} exact />
@@ -307,7 +310,7 @@ export class Admin extends React.Component {
 
 Admin.defaultProps = {
   intl: {
-    formatMessage: () => {},
+    formatMessage: () => { },
     locale: 'en',
   },
 };

@@ -28,7 +28,7 @@ const Wrapper = styled.div`
     }
 
     ::-webkit-scrollbar-thumb {
-      background-color: ${props => props.theme.main.colors.leftMenu['title-color']};
+      background-color: ${props => props.theme.main.colors.leftMenu['link-color']};
     }
 
     ::-webkit-scrollbar-thumb:hover {
@@ -36,7 +36,7 @@ const Wrapper = styled.div`
     }
 
     /* firefox */
-    scrollbar-color: ${props => props.theme.main.colors.leftMenu['title-color']} transparent;
+    scrollbar-color: ${props => props.theme.main.colors.leftMenu['link-color']} transparent;
   }
 `;
 

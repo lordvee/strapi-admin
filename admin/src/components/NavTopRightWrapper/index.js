@@ -7,7 +7,10 @@ const NavTopRightWrapper = styled.div`
   display: flex;
   background-color: #007eff;
   color: #fff;
+  width: 100%;
+  justify-content: flex-end;
   z-index: 1;
+
 `;
 
 export default NavTopRightWrapper;
