@@ -13,7 +13,7 @@ import { bindActionCreators, compose } from 'redux';
 import { Switch, Route, Link } from 'react-router-dom';
 import { injectIntl } from 'react-intl';
 import { isEmpty } from 'lodash';
-
+import Logo from '../../assets/images/punch-in-logo-inverted.png';
 // Components from strapi-helper-plugin
 import {
   difference,
@@ -262,13 +262,7 @@ export class Admin extends React.Component {
               plugins={plugins}
               setUpdateMenu={this.setUpdateMenu}
             />
-            <NavTopRightWrapper>
-              {/* Injection zone not ready yet */}
-              <Link to="/" className="leftMenuHeaderLink">
-                <span className="projectName" />
-              </Link>
-              <Logout />
-            </NavTopRightWrapper>
+
             <div className="adminPageRightWrapper">
               <Content>
                 <Switch>
@@ -295,6 +289,13 @@ export class Admin extends React.Component {
                 </Switch>
               </Content>
             </div>
+            <NavTopRightWrapper>
+              {/* Injection zone not ready yet */}
+              <Link to="/">
+                <img src={Logo} width={120} alt="Punch-in logo" style={{paddingLeft: '1.4em'}} />
+              </Link>
+              <Logout />
+            </NavTopRightWrapper>
             <OverlayBlocker
               key="overlayBlocker"
               isOpen={blockApp && showGlobalAppBlocker}
@@ -310,7 +311,7 @@ export class Admin extends React.Component {
 
 Admin.defaultProps = {
   intl: {
-    formatMessage: () => { },
+    formatMessage: () => {},
     locale: 'en',
   },
 };

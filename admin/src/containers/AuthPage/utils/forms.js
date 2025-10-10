@@ -4,6 +4,7 @@ import Login from 'ee_else_ce/containers/AuthPage/components/Login';
 import ForgotPassword from '../components/ForgotPassword';
 import ForgotPasswordSuccess from '../components/ForgotPasswordSuccess';
 import Oops from '../components/Oops';
+import Providers from '../components/Providers';
 import Register from '../components/Register';
 import ResetPassword from '../components/ResetPassword';
 
@@ -118,6 +119,14 @@ const forms = {
         .oneOf([yup.ref('password'), null], 'components.Input.error.password.noMatch')
         .required(translatedErrors.required),
     }),
+  },
+  providers: {
+    Component: Providers,
+    endPoint: null,
+    fieldsToDisable: [],
+    fieldsToOmit: [],
+    schema: null,
+    inputsPrefix: '',
   },
 };
 

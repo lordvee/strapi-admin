@@ -34,10 +34,10 @@ const colors = {
     'background-alpha': 'rgba(14, 22, 34, 0.02)',
   },
   leftMenu: {
-    'link-hover': '#c6eaff',
-    'link-visited': '#00458f',
-    'link-color': '#666e7d',
-    'title-color': '#5b626f',
+    'link-hover': '#00458f',
+    'link-visited': '#03a9f4',
+    'link-color': '#002b7d',
+    'title-color': '#002b7d',
     'background-header-link': '#007eff',
   },
   strapi: {
@@ -46,7 +46,8 @@ const colors = {
     'blue-darker': '#18202e',
     'blue-dark': '#151c2e',
     blue: '#0097f7',
-    'light-blue-transparent': '#0097f71c'
+    'light-blue-transparent': '#d0edff',
+    red: '#E91E63'
   },
 };
 

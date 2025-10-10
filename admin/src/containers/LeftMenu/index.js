@@ -4,7 +4,6 @@ import { useLocation } from 'react-router-dom';
 import {
   LeftMenuLinksSection,
   LeftMenuFooter,
-  LeftMenuHeader,
   LinksContainer,
 } from '../../components/LeftMenu';
 import Loader from './Loader';
@@ -45,7 +44,6 @@ const LeftMenu = ({ shouldUpdateStrapi, version, plugins, setUpdateMenu }) => {
   return (
     <Wrapper>
       <Loader show={isLoading} />
-      <LeftMenuHeader />
       <LinksContainer>
         {pluginsSectionLinks.length > 0 && (
           <LeftMenuLinksSection
@@ -86,7 +84,6 @@ const LeftMenu = ({ shouldUpdateStrapi, version, plugins, setUpdateMenu }) => {
           />
         )}
       </LinksContainer>
-      <LeftMenuFooter key="footer" version={version} />
     </Wrapper>
   );
 };

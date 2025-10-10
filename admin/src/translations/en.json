@@ -2,6 +2,7 @@
   "Analytics": "Analytics",
   "Auth.advanced.allow_register": "",
   "Auth.components.Oops.text": "Your account has been suspended",
+  "Auth.components.sso.info": "Login with your existing account:",
   "Auth.form.button.forgot-password": "Send Email",
   "Auth.form.button.go-home": "GO BACK HOME",
   "Auth.form.button.login": "Log in",

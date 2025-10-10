@@ -8,9 +8,10 @@ const NavTopRightWrapper = styled.div`
   background-color: #007eff;
   color: #fff;
   width: 100%;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 6px 18px #002f5f52;
   z-index: 1;
-
 `;
 
 export default NavTopRightWrapper;

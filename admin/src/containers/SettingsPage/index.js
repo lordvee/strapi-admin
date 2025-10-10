@@ -21,7 +21,7 @@ import { useIntl } from 'react-intl';
 import HeaderSearch from '../../components/HeaderSearch';
 import PageTitle from '../../components/PageTitle';
 import { useSettingsMenu } from '../../hooks';
-import { retrieveGlobalLinks } from '../../utils';
+import retrieveGlobalLinks from '../../utils/retrieveGlobalLinks';
 import SettingsSearchHeaderProvider from '../SettingsHeaderSearchContextProvider';
 import {
   ApplicationDetailLink,

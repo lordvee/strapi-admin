@@ -15,6 +15,10 @@ import LeftMenuIcon from './LeftMenuIcon';
 import A from './A';
 import NotificationCount from './NotificationCount';
 
+const Content = styled.span`
+  display:none;
+`;
+
 const LinkLabel = styled.span`
   display: inline-block;
   width: 100%;
@@ -62,7 +66,7 @@ const LeftMenuLinkContent = ({
       rel="noopener noreferrer"
     >
       <LeftMenuIcon icon={iconName} />
-      {content}
+      <Content className="hidetext">{content}</Content>
     </A>
   ) : (
     <A
@@ -74,8 +78,11 @@ const LeftMenuLinkContent = ({
       }}
     >
       <LeftMenuIcon icon={iconName} />
-      {content}
-      {notificationsCount > 0 && <NotificationCount count={notificationsCount} />}
+      <Content className="hidetext">
+        {content}
+        {notificationsCount > 0 && <NotificationCount count={notificationsCount} />}
+      </Content>
+
     </A>
   );
 };

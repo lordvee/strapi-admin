@@ -9,7 +9,7 @@
   },
   "listPlugins": {
     "id": "app.components.LeftMenuLinkContainer.listPlugins",
-    "defaultMessage": "Plugins"
+    "defaultMessage": "Modules"
   },
   "installNewPlugin": {
     "id": "app.components.LeftMenuLinkContainer.installNewPlugin",

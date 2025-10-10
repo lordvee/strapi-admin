@@ -39,7 +39,7 @@ function getCustomWebpackConfig(dir, config) {
 async function build({ dir, env, options, optimize }) {
   // Create the cache dir containing the front-end files.
   await createCacheDir(dir);
-
+  console.log('build env: ' + env);
   const cacheDir = path.resolve(dir, '.cache');
   const entry = path.resolve(cacheDir, 'admin', 'src', 'app.js');
   const dest = path.resolve(dir, 'build');
@@ -127,6 +127,7 @@ module.exports = {
 }
 
 async function clean({ dir }) {
+  console.log(`Cleaning up first...`)
   const buildDir = path.join(dir, 'build');
   const cacheDir = path.join(dir, '.cache');
 

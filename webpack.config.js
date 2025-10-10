@@ -1,5 +1,9 @@
+'use strict';
+
 const path = require('path');
 const webpack = require('webpack');
+
+// Webpack plugins
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -8,7 +12,11 @@ const TerserPlugin = require('terser-webpack-plugin');
 const WebpackBar = require('webpackbar');
 const isWsl = require('is-wsl');
 const alias = require('./webpack.alias.js');
-const { log } = require('console');
+
+// TODO: parametrize
+const URLs = {
+  mode: 'host',
+};
 
 module.exports = ({
   useEE,
@@ -23,9 +31,6 @@ module.exports = ({
   },
 }) => {
   const isProduction = env === 'production';
-  console.log(`The env is ${env}`);
-  
-
   const webpackPlugins = isProduction
     ? [
         new webpack.IgnorePlugin({
@@ -51,45 +56,46 @@ module.exports = ({
   return {
     mode: isProduction ? 'production' : 'development',
     bail: isProduction ? true : false,
-    devtool: isProduction ? false : 'eval-source-map', // Use eval-source-map for better dev debugging
+    devtool: isProduction ? false : 'source-map',
     entry,
     output: {
       path: dest,
       publicPath: options.publicPath,
-      filename: isProduction ? '[name].[contenthash:8].js' : 'bundle.js',
-      chunkFilename: isProduction ? '[name].[contenthash:8].chunk.js' : '[name].chunk.js',
+      // Utilize long-term caching by adding content hashes (not compilation hashes)
+      // to compiled assets for production
+      filename: '[name].[contenthash:8].js',
+      chunkFilename: '[name].[contenthash:8].chunk.js',
     },
     optimization: {
-      minimize: isProduction, // Only minimize in production
-      minimizer: isProduction ? [
+      minimize: optimize,
+      minimizer: [
+        // Copied from react-scripts
         new TerserPlugin({
           terserOptions: {
             parse: {
               ecma: 8,
             },
-            compress: isProduction ? {
+            compress: {
               ecma: 5,
               warnings: false,
               comparisons: false,
               inline: 2,
-            } : false, // Disable compression in development
-            mangle: isProduction ? {
+            },
+            mangle: {
               safari10: true,
-            } : false, // Disable mangling in development to preserve variable names
-            output: isProduction ? {
+            },
+            output: {
               ecma: 5,
               comments: false,
               ascii_only: true,
-            } : {
-              beautify: true, // Beautify the output in development for readability
-              comments: true, // Keep comments in development
             },
           },
           parallel: !isWsl,
+          // Enable file caching
           cache: true,
-          sourceMap: !isProduction, // Keep source maps in development for better debugging
+          sourceMap: isProduction ? false : true,
         }),
-      ] : [],
+      ],
       runtimeChunk: true,
     },
     module: {
@@ -123,12 +129,17 @@ module.exports = ({
             },
           },
         },
+        // Copied from react-boilerplate https://github.com/react-boilerplate/react-boilerplate
         {
+          // Preprocess our own .css files
+          // This is the place to add your own loaders (e.g. sass/less etc.)
+          // for a list of loaders, see https://webpack.js.org/loaders/#styling
           test: /\.css$/,
           exclude: /node_modules/,
           use: ['style-loader', 'css-loader'],
         },
         {
+          // Preprocess 3rd party .css files located in node_modules
           test: /\.css$/,
           include: /node_modules/,
           use: ['style-loader', 'css-loader'],
@@ -138,7 +149,7 @@ module.exports = ({
           use: 'file-loader',
         },
         {
-          test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/, /\.ico$/],
+          test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/, /\.ico$/, /\.webp$/],
           loader: require.resolve('url-loader'),
           options: {
             limit: 1000,
@@ -168,13 +179,14 @@ module.exports = ({
       new HtmlWebpackPlugin({
         inject: true,
         template: path.resolve(__dirname, 'index.html'),
+        // favicon: path.resolve(__dirname, 'admin/src/favicon.ico'),
       }),
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify(isProduction ? 'production' : 'development'),
         NODE_ENV: JSON.stringify(isProduction ? 'production' : 'development'),
         REMOTE_URL: JSON.stringify(options.publicPath),
         BACKEND_URL: JSON.stringify(options.backend),
-        MODE: JSON.stringify(URLs.mode),
+        MODE: JSON.stringify(URLs.mode), // Allow us to define the public path for the plugins assets.
         PUBLIC_PATH: JSON.stringify(options.publicPath),
         PROJECT_TYPE: JSON.stringify(useEE ? 'Enterprise' : 'Community'),
         ENABLED_EE_FEATURES: JSON.stringify(options.features),

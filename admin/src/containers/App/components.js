@@ -6,6 +6,8 @@ const Wrapper = styled.div`
   font-weight: 400;
   line-height: 1.5;
   color: #292b2c;
+  background: linear-gradient(to bottom, #ffffff, #E3F2FD);
+  height: 100vh;
 `;
 
 const Content = styled.div`

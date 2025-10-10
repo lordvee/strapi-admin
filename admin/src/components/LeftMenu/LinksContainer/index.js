@@ -3,14 +3,33 @@ import PropTypes from 'prop-types';
 
 const LinksContainer = styled.div`
   padding-top: 0.7rem;
-  position: absolute;
-  top: ${props => { console.log('Heigth:',props.theme.main.sizes.leftMenu.height); return props.theme.main.sizes.leftMenu.height}};
+  position: fixed;
+  top: ${props => props.theme.main.sizes.leftMenu.height};
+  z-index: 20;
+  overflow: hidden;
   right: 0;
   bottom: 0;
   left: 0;
-  overflow-y: auto;
-  height: calc(100vh - (${props => props.theme.main.sizes.leftMenu.height} + 2rem));
   box-sizing: border-box;
+  width: 6rem;
+  background: ${props => props.theme.main.colors.strapi['light-blue-transparent']};
+  transition: width 0.3s ease-out, visibility 0s, opacity 0.3s linear;
+  &:hover {
+    width: 22rem;
+  }
+  &:hover .hidetext {
+    display: inline;
+  }
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 9px;
+    height: 100%;
+    background: linear-gradient(to right, transparent, rgb(0 0 0 / 10%));
+    pointer-events: none;
+  }
 `;
 
 LinksContainer.defaultProps = {

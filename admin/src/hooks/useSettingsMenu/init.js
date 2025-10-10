@@ -1,4 +1,6 @@
-import { retrieveGlobalLinks, retrievePluginsMenu, sortLinks } from '../../utils';
+import retrieveGlobalLinks from '../../utils/retrieveGlobalLinks';
+import retrievePluginsMenu from '../../utils/retrievePluginsMenu';
+import sortLinks from '../../utils/sortLinks';
 import { SETTINGS_BASE_URL } from '../../config';
 import adminPermissions from '../../permissions';
 import formatLinks from './utils/formatLinks';

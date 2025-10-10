@@ -1,5 +1,5 @@
 const sizes = {
-  borderRadius: '2px',
+  borderRadius: '5px',
   header: {
     height: '6rem',
   },

@@ -8,12 +8,11 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 const Wrapper = styled.div`
-  position: fixed;
-  float: left;
-  top: 0;
-  left: 0;
   height: 100vh;
-  width: ${props => props.theme.main.sizes.leftMenu.width};
+  width: 6rem;
+  top: 60px;
+  position: fixed;
+  z-index: 10;
   background: ${props => props.theme.main.colors.strapi['light-blue-transparent']};
 
   /* scrollbar overrides */
@@ -28,7 +27,7 @@ const Wrapper = styled.div`
     }
 
     ::-webkit-scrollbar-thumb {
-      background-color: ${props => props.theme.main.colors.leftMenu['link-color']};
+      background-color: ${props => props.theme.main.colors.leftMenu['title-color']};
     }
 
     ::-webkit-scrollbar-thumb:hover {
@@ -36,7 +35,7 @@ const Wrapper = styled.div`
     }
 
     /* firefox */
-    scrollbar-color: ${props => props.theme.main.colors.leftMenu['link-color']} transparent;
+    scrollbar-color: ${props => props.theme.main.colors.leftMenu['title-color']} transparent;
   }
 `;
 

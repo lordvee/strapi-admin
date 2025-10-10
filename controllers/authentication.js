@@ -178,4 +178,97 @@ module.exports = {
       },
     };
   },
+
+  async getProviders(ctx) {
+    try {
+      // Mock providers - in a real implementation, these would come from configuration
+      const providers = [
+        {
+          uid: 'google',
+          displayName: 'Google',
+          icon: 'https://developers.google.com/identity/images/g-logo.png',
+        },
+        {
+          uid: 'github',
+          displayName: 'GitHub',
+          icon: 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png',
+        },
+        {
+          uid: 'microsoft',
+          displayName: 'Microsoft',
+          icon: 'https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg',
+        },
+        {
+          uid: 'facebook',
+          displayName: 'Facebook',
+          icon: 'https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg',
+        },
+        {
+          uid: 'linkedin',
+          displayName: 'LinkedIn',
+          icon: 'https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png',
+        },
+      ];
+
+      ctx.body = providers;
+    } catch (err) {
+      ctx.badRequest(null, 'An error occurred while retrieving providers');
+    }
+  },
+
+  async providerLogin(ctx) {
+    try {
+      const { provider } = ctx.params;
+      
+      // This is where you would implement the actual OAuth flow
+      // For now, we'll just redirect to the provider's OAuth URL
+      const providerUrls = {
+        google: `https://accounts.google.com/oauth/authorize?client_id=${process.env.GOOGLE_CLIENT_ID}&redirect_uri=${process.env.GOOGLE_REDIRECT_URI}&scope=openid%20email%20profile&response_type=code`,
+        github: `https://github.com/login/oauth/authorize?client_id=${process.env.GITHUB_CLIENT_ID}&redirect_uri=${process.env.GITHUB_REDIRECT_URI}&scope=user:email`,
+        microsoft: `https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=${process.env.MICROSOFT_CLIENT_ID}&redirect_uri=${process.env.MICROSOFT_REDIRECT_URI}&scope=openid%20email%20profile&response_type=code`,
+        facebook: `https://www.facebook.com/v18.0/dialog/oauth?client_id=${process.env.FACEBOOK_CLIENT_ID}&redirect_uri=${process.env.FACEBOOK_REDIRECT_URI}&scope=email%20public_profile&response_type=code`,
+        linkedin: `https://www.linkedin.com/oauth/v2/authorization?client_id=${process.env.LINKEDIN_CLIENT_ID}&redirect_uri=${process.env.LINKEDIN_REDIRECT_URI}&scope=r_liteprofile%20r_emailaddress&response_type=code`,
+      };
+
+      const authUrl = providerUrls[provider];
+      
+      if (!authUrl) {
+        return ctx.badRequest(null, 'Provider not supported');
+      }
+
+      ctx.redirect(authUrl);
+    } catch (err) {
+      ctx.badRequest(null, 'An error occurred while connecting to provider');
+    }
+  },
+
+  async getProviderLoginOptions(ctx) {
+    try {
+      // Mock provider login options - in a real implementation, these would come from configuration
+      const options = {
+        autoRegister: true,
+        defaultRole: 'authenticated',
+      };
+
+      ctx.body = {
+        data: options,
+      };
+    } catch (err) {
+      ctx.badRequest(null, 'An error occurred while retrieving provider login options');
+    }
+  },
+
+  async updateProviderLoginOptions(ctx) {
+    try {
+      const input = ctx.request.body;
+      
+      // In a real implementation, you would validate and save these options
+      // For now, we'll just return the input as confirmation
+      ctx.body = {
+        data: input,
+      };
+    } catch (err) {
+      ctx.badRequest(null, 'An error occurred while updating provider login options');
+    }
+  },
 };

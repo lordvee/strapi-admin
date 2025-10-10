@@ -5,7 +5,7 @@ const Search = styled.input`
   padding: 0 15px;
   outline: 0;
   font-size: 1.1rem;
-  color: ${({ theme }) => theme.main.colors.white};
+  color: ${({ theme }) => theme.main.colors.black};
 `;
 
 export default Search;
