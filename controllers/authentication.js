@@ -2,6 +2,8 @@
 
 const passport = require('koa-passport');
 const compose = require('koa-compose');
+const crypto = require('crypto');
+const axios = require('axios');
 
 const {
   validateRegistrationInput,
@@ -179,97 +181,80 @@ module.exports = {
     };
   },
 
+  // Admin SSO now goes through the central Lambda (api.punch-in.co.uk),
+  // registered once per provider instead of once per tenant - see
+  // stripe-charge/strapi-charge/{sso.js,controllers/ssoController.js}.
+  // This instance's only remaining jobs are: (1) tell the login page which
+  // provider buttons to show, (2) hand the browser off with its own
+  // subdomain attached, (3) later, verify a provider-confirmed email
+  // against *this* tenant's admin_users - never creating one.
+
   async ssoProviders(ctx) {
-    ctx.body = strapi.admin.services.sso.getConfiguredProviders();
+    try {
+      const { data } = await axios.get(`${getCentralApiBase()}/sso/auth/providers`, {
+        timeout: 5000,
+      });
+      ctx.body = data;
+    } catch (err) {
+      strapi.log.error(`Failed to fetch SSO providers: ${err.message}`);
+      ctx.body = [];
+    }
   },
 
   async ssoConnect(ctx) {
     const { provider: providerUid } = ctx.params;
-    const provider = strapi.admin.services.sso.getProvider(providerUid);
+    const subdomain = process.env.SUBDOMAIN;
 
-    if (!provider) {
-      return ctx.notFound('Unknown or unconfigured SSO provider');
+    if (!subdomain) {
+      return ctx.badRequest('SUBDOMAIN is not configured on this Strapi instance');
     }
 
-    const redirectUri = getSsoCallbackUrl(ctx, providerUid);
-    const state = strapi.admin.services.sso.signState();
+    const url = new URL(`${getCentralApiBase()}/sso/auth/${providerUid}`);
+    url.searchParams.set('subdomain', subdomain);
 
-    const authorizeUrl = new URL(provider.authorizeUrl);
-    authorizeUrl.searchParams.set('client_id', process.env[`${providerUid.toUpperCase()}_CLIENT_ID`]);
-    authorizeUrl.searchParams.set('redirect_uri', redirectUri);
-    authorizeUrl.searchParams.set('scope', provider.scope);
-    authorizeUrl.searchParams.set('response_type', 'code');
-    authorizeUrl.searchParams.set('state', state);
-
-    ctx.redirect(authorizeUrl.toString());
+    ctx.redirect(url.toString());
   },
 
-  async ssoCallback(ctx) {
-    const { provider: providerUid } = ctx.params;
-    const { code, state, error } = ctx.query;
-    const adminLoginUrl = getAdminLoginUrl(ctx);
-    const fail = reason => ctx.redirect(`${adminLoginUrl}?ssoError=${encodeURIComponent(reason)}`);
-
-    if (error) return fail('access_denied');
-    if (!code) return fail('missing_code');
-    if (!strapi.admin.services.sso.verifyState(state)) return fail('invalid_state');
-
-    const provider = strapi.admin.services.sso.getProvider(providerUid);
-    if (!provider) return fail('unsupported_provider');
-
-    let email;
-    try {
-      const redirectUri = getSsoCallbackUrl(ctx, providerUid);
-      email = await provider.getVerifiedEmail(code, redirectUri);
-    } catch (err) {
-      strapi.log.error(`SSO callback error for ${providerUid}: ${err.message}`);
-      return fail('provider_error');
+  // POST /admin/sso/verify - called server-to-server by the central Lambda
+  // once it has a provider-verified email, authenticated the same way
+  // api/provider-connections' callback already is (X-Sync-Secret, constant-
+  // time compare). Read-only: an unmatched or inactive email is rejected,
+  // never used to create or activate an admin account.
+  async ssoVerify(ctx) {
+    const expected = process.env.SYNC_SECRET;
+    if (!expected) {
+      return ctx.internalServerError('SYNC_SECRET is not configured on this Strapi instance');
     }
 
-    if (!email) return fail('email_not_verified');
+    const provided = ctx.request.header['x-sync-secret'];
+    if (!secretsMatch(provided, expected)) {
+      return ctx.forbidden('Invalid sync secret');
+    }
 
-    // Read-only lookup - an unrecognized or inactive email is rejected,
-    // never used to create or activate an admin account.
+    const { email, provider } = ctx.request.body || {};
     const user = await strapi.admin.services.auth.findActiveAdminByVerifiedEmail(email);
 
     if (!user) {
       strapi.eventHub.emit('admin.auth.error', {
         error: new Error('No matching active admin account for SSO email'),
-        provider: providerUid,
+        provider: provider || 'sso',
       });
-      return fail('no_admin_account');
+      return ctx.notFound('No matching active admin account');
     }
 
-    strapi.eventHub.emit('admin.auth.success', { user, provider: providerUid });
+    strapi.eventHub.emit('admin.auth.success', { user, provider: provider || 'sso' });
 
-    const token = strapi.admin.services.token.createJwtToken(user);
-    ctx.redirect(`${adminLoginUrl}?ssoToken=${encodeURIComponent(token)}`);
+    ctx.body = { token: strapi.admin.services.token.createJwtToken(user) };
   },
 };
 
-// The provider must redirect back to this exact URI - derived from the
-// incoming request rather than strapi.config.server.url (which isn't
-// reliably populated per-tenant), so it matches whatever host the browser
-// is actually talking to.
-function getBackendOrigin(ctx) {
-  return `${ctx.request.protocol}://${ctx.request.header.host}`;
+function getCentralApiBase() {
+  return (process.env.PUNCHIN_INTEGRATIONS_API_BASE || 'https://api.punch-in.co.uk').replace(/\/$/, '');
 }
 
-function getSsoCallbackUrl(ctx, providerUid) {
-  return `${getBackendOrigin(ctx)}/admin/connect/${providerUid}/callback`;
-}
-
-// The admin panel frontend is served separately from this API (see
-// config/server.js's serveAdminPanel: false) - ADMIN_PANEL_URL is an
-// explicit override, SUBDOMAIN is what the tenant CloudFormation stack
-// already provisions (see api/provider-connections), and same-origin is
-// the fallback for local/single-host setups.
-function getAdminLoginUrl(ctx) {
-  const base = process.env.ADMIN_PANEL_URL
-    ? process.env.ADMIN_PANEL_URL.replace(/\/$/, '')
-    : process.env.SUBDOMAIN
-    ? `https://${process.env.SUBDOMAIN}-admin.punch-in.co.uk`
-    : getBackendOrigin(ctx);
-
-  return `${base}/auth/login`;
+function secretsMatch(provided, expected) {
+  if (!provided || !expected) return false;
+  const a = Buffer.from(provided);
+  const b = Buffer.from(expected);
+  return a.length === b.length && crypto.timingSafeEqual(a, b);
 }

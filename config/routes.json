@@ -94,9 +94,12 @@
       "handler": "authentication.ssoConnect"
     },
     {
-      "method": "GET",
-      "path": "/connect/:provider/callback",
-      "handler": "authentication.ssoCallback"
+      "method": "POST",
+      "path": "/sso/verify",
+      "handler": "authentication.ssoVerify",
+      "config": {
+        "policies": []
+      }
     },
     {
       "method": "GET",
