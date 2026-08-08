@@ -139,5 +139,5 @@
     "develop:ce": "STRAPI_DISABLE_EE=true webpack-dev-server --config webpack.config.dev.js",
     "test": "echo \"no tests yet\""
   },
-  "version": "1.1.0"
+  "version": "1.2.0"
 }
