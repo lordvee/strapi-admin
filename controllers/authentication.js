@@ -179,96 +179,97 @@ module.exports = {
     };
   },
 
-  async getProviders(ctx) {
-    try {
-      // Mock providers - in a real implementation, these would come from configuration
-      const providers = [
-        {
-          uid: 'google',
-          displayName: 'Google',
-          icon: 'https://developers.google.com/identity/images/g-logo.png',
-        },
-        {
-          uid: 'github',
-          displayName: 'GitHub',
-          icon: 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png',
-        },
-        {
-          uid: 'microsoft',
-          displayName: 'Microsoft',
-          icon: 'https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg',
-        },
-        {
-          uid: 'facebook',
-          displayName: 'Facebook',
-          icon: 'https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg',
-        },
-        {
-          uid: 'linkedin',
-          displayName: 'LinkedIn',
-          icon: 'https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png',
-        },
-      ];
-
-      ctx.body = providers;
-    } catch (err) {
-      ctx.badRequest(null, 'An error occurred while retrieving providers');
-    }
+  async ssoProviders(ctx) {
+    ctx.body = strapi.admin.services.sso.getConfiguredProviders();
   },
 
-  async providerLogin(ctx) {
-    try {
-      const { provider } = ctx.params;
-      
-      // This is where you would implement the actual OAuth flow
-      // For now, we'll just redirect to the provider's OAuth URL
-      const providerUrls = {
-        google: `https://accounts.google.com/oauth/authorize?client_id=${process.env.GOOGLE_CLIENT_ID}&redirect_uri=${process.env.GOOGLE_REDIRECT_URI}&scope=openid%20email%20profile&response_type=code`,
-        github: `https://github.com/login/oauth/authorize?client_id=${process.env.GITHUB_CLIENT_ID}&redirect_uri=${process.env.GITHUB_REDIRECT_URI}&scope=user:email`,
-        microsoft: `https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=${process.env.MICROSOFT_CLIENT_ID}&redirect_uri=${process.env.MICROSOFT_REDIRECT_URI}&scope=openid%20email%20profile&response_type=code`,
-        facebook: `https://www.facebook.com/v18.0/dialog/oauth?client_id=${process.env.FACEBOOK_CLIENT_ID}&redirect_uri=${process.env.FACEBOOK_REDIRECT_URI}&scope=email%20public_profile&response_type=code`,
-        linkedin: `https://www.linkedin.com/oauth/v2/authorization?client_id=${process.env.LINKEDIN_CLIENT_ID}&redirect_uri=${process.env.LINKEDIN_REDIRECT_URI}&scope=r_liteprofile%20r_emailaddress&response_type=code`,
-      };
+  async ssoConnect(ctx) {
+    const { provider: providerUid } = ctx.params;
+    const provider = strapi.admin.services.sso.getProvider(providerUid);
 
-      const authUrl = providerUrls[provider];
-      
-      if (!authUrl) {
-        return ctx.badRequest(null, 'Provider not supported');
-      }
-
-      ctx.redirect(authUrl);
-    } catch (err) {
-      ctx.badRequest(null, 'An error occurred while connecting to provider');
+    if (!provider) {
+      return ctx.notFound('Unknown or unconfigured SSO provider');
     }
+
+    const redirectUri = getSsoCallbackUrl(ctx, providerUid);
+    const state = strapi.admin.services.sso.signState();
+
+    const authorizeUrl = new URL(provider.authorizeUrl);
+    authorizeUrl.searchParams.set('client_id', process.env[`${providerUid.toUpperCase()}_CLIENT_ID`]);
+    authorizeUrl.searchParams.set('redirect_uri', redirectUri);
+    authorizeUrl.searchParams.set('scope', provider.scope);
+    authorizeUrl.searchParams.set('response_type', 'code');
+    authorizeUrl.searchParams.set('state', state);
+
+    ctx.redirect(authorizeUrl.toString());
   },
 
-  async getProviderLoginOptions(ctx) {
-    try {
-      // Mock provider login options - in a real implementation, these would come from configuration
-      const options = {
-        autoRegister: true,
-        defaultRole: 'authenticated',
-      };
+  async ssoCallback(ctx) {
+    const { provider: providerUid } = ctx.params;
+    const { code, state, error } = ctx.query;
+    const adminLoginUrl = getAdminLoginUrl(ctx);
+    const fail = reason => ctx.redirect(`${adminLoginUrl}?ssoError=${encodeURIComponent(reason)}`);
 
-      ctx.body = {
-        data: options,
-      };
-    } catch (err) {
-      ctx.badRequest(null, 'An error occurred while retrieving provider login options');
-    }
-  },
+    if (error) return fail('access_denied');
+    if (!code) return fail('missing_code');
+    if (!strapi.admin.services.sso.verifyState(state)) return fail('invalid_state');
 
-  async updateProviderLoginOptions(ctx) {
+    const provider = strapi.admin.services.sso.getProvider(providerUid);
+    if (!provider) return fail('unsupported_provider');
+
+    let email;
     try {
-      const input = ctx.request.body;
-      
-      // In a real implementation, you would validate and save these options
-      // For now, we'll just return the input as confirmation
-      ctx.body = {
-        data: input,
-      };
+      const redirectUri = getSsoCallbackUrl(ctx, providerUid);
+      email = await provider.getVerifiedEmail(code, redirectUri);
     } catch (err) {
-      ctx.badRequest(null, 'An error occurred while updating provider login options');
+      strapi.log.error(`SSO callback error for ${providerUid}: ${err.message}`);
+      return fail('provider_error');
     }
+
+    if (!email) return fail('email_not_verified');
+
+    // Read-only lookup - an unrecognized or inactive email is rejected,
+    // never used to create or activate an admin account.
+    const user = await strapi.admin.services.auth.findActiveAdminByVerifiedEmail(email);
+
+    if (!user) {
+      strapi.eventHub.emit('admin.auth.error', {
+        error: new Error('No matching active admin account for SSO email'),
+        provider: providerUid,
+      });
+      return fail('no_admin_account');
+    }
+
+    strapi.eventHub.emit('admin.auth.success', { user, provider: providerUid });
+
+    const token = strapi.admin.services.token.createJwtToken(user);
+    ctx.redirect(`${adminLoginUrl}?ssoToken=${encodeURIComponent(token)}`);
   },
 };
+
+// The provider must redirect back to this exact URI - derived from the
+// incoming request rather than strapi.config.server.url (which isn't
+// reliably populated per-tenant), so it matches whatever host the browser
+// is actually talking to.
+function getBackendOrigin(ctx) {
+  return `${ctx.request.protocol}://${ctx.request.header.host}`;
+}
+
+function getSsoCallbackUrl(ctx, providerUid) {
+  return `${getBackendOrigin(ctx)}/admin/connect/${providerUid}/callback`;
+}
+
+// The admin panel frontend is served separately from this API (see
+// config/server.js's serveAdminPanel: false) - ADMIN_PANEL_URL is an
+// explicit override, SUBDOMAIN is what the tenant CloudFormation stack
+// already provisions (see api/provider-connections), and same-origin is
+// the fallback for local/single-host setups.
+function getAdminLoginUrl(ctx) {
+  const base = process.env.ADMIN_PANEL_URL
+    ? process.env.ADMIN_PANEL_URL.replace(/\/$/, '')
+    : process.env.SUBDOMAIN
+    ? `https://${process.env.SUBDOMAIN}-admin.punch-in.co.uk`
+    : getBackendOrigin(ctx);
+
+  return `${base}/auth/login`;
+}

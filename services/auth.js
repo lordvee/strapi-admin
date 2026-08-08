@@ -46,6 +46,23 @@ const checkCredentials = async ({ email, password }) => {
 };
 
 /**
+ * Look up an existing, active admin by a *verified* email address for SSO
+ * login. Deliberately read-only - unlike checkCredentials, this must never
+ * create, activate, or otherwise modify an admin_users row. An email with
+ * no matching account, or matching an inactive one, yields no session.
+ * @param {string} email - email already verified by the SSO provider
+ */
+const findActiveAdminByVerifiedEmail = async email => {
+  if (!email) return null;
+
+  const user = await strapi.query('user', 'admin').findOne({ email });
+  if (!user) return null;
+  if (!(user.isActive === true)) return null;
+
+  return user;
+};
+
+/**
  * Send an email to the user if it exists or do nothing
  * @param {Object} param params
  * @param {string} param.email user email for which to reset the password
@@ -106,6 +123,7 @@ const resetPassword = async ({ resetPasswordToken, password } = {}) => {
 
 module.exports = {
   checkCredentials,
+  findActiveAdminByVerifiedEmail,
   validatePassword,
   hashPassword,
   forgotPassword,

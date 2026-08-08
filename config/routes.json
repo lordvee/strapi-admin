@@ -85,6 +85,21 @@
     },
     {
       "method": "GET",
+      "path": "/providers",
+      "handler": "authentication.ssoProviders"
+    },
+    {
+      "method": "GET",
+      "path": "/connect/:provider",
+      "handler": "authentication.ssoConnect"
+    },
+    {
+      "method": "GET",
+      "path": "/connect/:provider/callback",
+      "handler": "authentication.ssoCallback"
+    },
+    {
+      "method": "GET",
       "path": "/webhooks",
       "handler": "Webhooks.listWebhooks",
       "config": {

@@ -87,6 +87,59 @@ const AuthPage = ({ hasAdmin, setHasAdmin }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [authType]);
 
+  // Lands here after a full-page round trip through an SSO provider
+  // (controllers/authentication.js's ssoCallback). The token in the URL is
+  // a normal admin JWT for an *existing* admin the provider's verified
+  // email matched - nothing was created. Fetch the profile it belongs to,
+  // persist it the same way a password login does, then drop both params
+  // from the URL so the JWT doesn't linger in browser history.
+  useEffect(() => {
+    const ssoToken = query.get('ssoToken');
+    const ssoError = query.get('ssoError');
+
+    if (!ssoToken && !ssoError) return;
+
+    window.history.replaceState(null, '', window.location.pathname);
+
+    if (ssoError) {
+      const messages = {
+        access_denied: 'Sign-in was cancelled.',
+        no_admin_account: 'No admin account exists for that email address.',
+        email_not_verified: "That provider didn't return a verified email address.",
+      };
+
+      strapi.notification.toggle({
+        type: 'warning',
+        message: messages[ssoError] || 'Single sign-on failed. Please try again.',
+      });
+      return;
+    }
+
+    const completeSsoLogin = async () => {
+      try {
+        const {
+          data: { data: user },
+        } = await axios.get(`${strapi.backendURL}/admin/users/me`, {
+          headers: { Authorization: `Bearer ${ssoToken}` },
+          cancelToken: source.token,
+        });
+
+        auth.setToken(ssoToken, false);
+        auth.setUserInfo(user, false);
+
+        push('/');
+      } catch (err) {
+        strapi.notification.toggle({
+          type: 'warning',
+          message: 'Single sign-on failed. Please try again.',
+        });
+      }
+    };
+
+    completeSsoLogin();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const handleChange = ({ target: { name, value } }) => {
     dispatch({
       type: 'ON_CHANGE',
