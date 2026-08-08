@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text } from '@buffetjs/core';
+import { Text } from '@punch-in/buffet-modern-core';
 import { useIntl } from 'react-intl';
 import StyledListItem from './StyledListItem';
 

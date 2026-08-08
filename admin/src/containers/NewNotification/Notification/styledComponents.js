@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Arrow } from '@buffetjs/icons';
+import { Arrow } from '@punch-in/buffet-modern-icons';
 
 const NotificationWrapper = styled.div`
   position: relative;

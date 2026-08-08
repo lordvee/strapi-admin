@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Flex } from '@buffetjs/core';
+import { Flex } from '@punch-in/buffet-modern-core';
 
 const IconWrapper = styled(Flex)`
   height: 100%;

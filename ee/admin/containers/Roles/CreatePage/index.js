@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
-import { Header } from '@buffetjs/custom';
-import { Padded } from '@buffetjs/core';
+import { Header } from '@punch-in/buffet-modern-custom';
+import { Padded } from '@punch-in/buffet-modern-core';
 import moment from 'moment';
 import { Formik } from 'formik';
 import { get, isEmpty } from 'lodash';

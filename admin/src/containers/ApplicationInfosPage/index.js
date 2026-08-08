@@ -1,6 +1,6 @@
 import React, { memo, useMemo } from 'react';
-import { Header } from '@buffetjs/custom';
-import { Flex, Padded, Text } from '@buffetjs/core';
+import { Header } from '@punch-in/buffet-modern-custom';
+import { Flex, Padded, Text } from '@punch-in/buffet-modern-core';
 import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 import { useIntl } from 'react-intl';

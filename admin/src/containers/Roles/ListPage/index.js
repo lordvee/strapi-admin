@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { List, Header } from '@buffetjs/custom';
-import { Button } from '@buffetjs/core';
-import { Duplicate, Pencil, Plus } from '@buffetjs/icons';
+import { List, Header } from '@punch-in/buffet-modern-custom';
+import { Button } from '@punch-in/buffet-modern-core';
+import { Duplicate, Pencil, Plus } from '@punch-in/buffet-modern-icons';
 import matchSorter from 'match-sorter';
 import { useIntl } from 'react-intl';
 import { useHistory } from 'react-router-dom';

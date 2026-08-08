@@ -1,6 +1,6 @@
 import React, { useReducer, useEffect } from 'react';
-import { Button, Flex, Padded, Separator } from '@buffetjs/core';
-import { LoadingIndicator } from '@buffetjs/styles';
+import { Button, Flex, Padded, Separator } from '@punch-in/buffet-modern-core';
+import { LoadingIndicator } from '@punch-in/buffet-modern-styles';
 import { Redirect, useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { useIntl } from 'react-intl';

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { InputText, Select, Toggle } from '@buffetjs/core';
+import { InputText, Select, Toggle } from '@punch-in/buffet-modern-core';
 import { formatInputValue } from './utils';
 
 const getInputType = type => {

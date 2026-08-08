@@ -5,7 +5,7 @@
  */
 
 import styled from 'styled-components';
-import { CustomRow as Row } from '@buffetjs/styles';
+import { CustomRow as Row } from '@punch-in/buffet-modern-styles';
 import { sizes } from 'strapi-helper-plugin';
 
 const StyledListRow = styled(Row)`

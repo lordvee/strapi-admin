@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Picker } from '@buffetjs/core';
+import { Picker } from '@punch-in/buffet-modern-core';
 
 import Button from './Button';
 import Card from './Card';

@@ -1,4 +1,4 @@
-import { Text } from '@buffetjs/core';
+import { Text } from '@punch-in/buffet-modern-core';
 import Chevron from '../../Chevron';
 
 const activeStyle = theme => `

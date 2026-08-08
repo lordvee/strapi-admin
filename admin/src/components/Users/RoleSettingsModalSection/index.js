@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ModalSection } from 'strapi-helper-plugin';
-import { Padded } from '@buffetjs/core';
+import { Padded } from '@punch-in/buffet-modern-core';
 import { Row } from 'reactstrap';
 import { useIntl } from 'react-intl';
 import roleSettingsForm from 'ee_else_ce/components/Users/ModalCreateBody/utils/roleSettingsForm';

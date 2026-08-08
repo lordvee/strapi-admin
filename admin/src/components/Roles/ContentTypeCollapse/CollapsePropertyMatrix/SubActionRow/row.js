@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Flex } from '@buffetjs/core';
+import { Flex } from '@punch-in/buffet-modern-core';
 import PropTypes from 'prop-types';
 import Chevron from '../../../Chevron';
 import { activeStyle } from '../../utils';

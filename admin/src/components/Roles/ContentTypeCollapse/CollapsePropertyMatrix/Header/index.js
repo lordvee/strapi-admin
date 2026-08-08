@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
-import { Flex, Text } from '@buffetjs/core';
+import { Flex, Text } from '@punch-in/buffet-modern-core';
 import styled from 'styled-components';
 // Those styles are very specific.
 // so it is not a big problem to use custom paddings and widths.

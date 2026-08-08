@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { Select, Padded } from '@buffetjs/core';
+import { Select, Padded } from '@punch-in/buffet-modern-core';
 import Button from '../../../FullWidthButton';
 import { form, getInputValue } from './utils';
 import { initialState, reducer } from './reducer';

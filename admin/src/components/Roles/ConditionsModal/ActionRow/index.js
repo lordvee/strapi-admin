@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text, Padded, Flex } from '@buffetjs/core';
+import { Text, Padded, Flex } from '@punch-in/buffet-modern-core';
 import { useIntl } from 'react-intl';
 
 import ConditionsSelect from '../ConditionsSelect';

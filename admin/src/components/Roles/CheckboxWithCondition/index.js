@@ -1,6 +1,6 @@
 /* eslint-disable indent */
 import styled from 'styled-components';
-import { Checkbox } from '@buffetjs/core';
+import { Checkbox } from '@punch-in/buffet-modern-core';
 
 const CheckboxWithCondition = styled(Checkbox)`
   min-width: 10rem;

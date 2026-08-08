@@ -9,7 +9,7 @@ import {
 } from 'strapi-helper-plugin';
 import { get } from 'lodash';
 import { useHistory, useLocation } from 'react-router-dom';
-import { Flex, Padded } from '@buffetjs/core';
+import { Flex, Padded } from '@punch-in/buffet-modern-core';
 import PageTitle from '../../../components/SettingsPageTitle';
 import { useSettingsHeaderSearchContext } from '../../../hooks';
 import { Footer, List, Filter, FilterPicker, SortPicker } from '../../../components/Users';

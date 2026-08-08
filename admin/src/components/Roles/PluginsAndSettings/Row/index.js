@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Flex, Text } from '@buffetjs/core';
+import { Flex, Text } from '@punch-in/buffet-modern-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { PermissionsWrapper, RowContainer } from 'strapi-helper-plugin';
 import PropTypes from 'prop-types';

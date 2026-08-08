@@ -1,8 +1,8 @@
 // This component is a work in progress
 // It's made to be used when the users API is ready
 import React from 'react';
-import { Flex, Text } from '@buffetjs/core';
-import { Duplicate } from '@buffetjs/icons';
+import { Flex, Text } from '@punch-in/buffet-modern-core';
+import { Duplicate } from '@punch-in/buffet-modern-icons';
 import PropTypes from 'prop-types';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import IconWrapper from './IconWrapper';

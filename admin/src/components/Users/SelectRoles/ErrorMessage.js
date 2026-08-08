@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ErrorMessage as Base } from '@buffetjs/styles';
+import { ErrorMessage as Base } from '@punch-in/buffet-modern-styles';
 
 const ErrorMessage = styled(Base)`
   padding-top: 11px;

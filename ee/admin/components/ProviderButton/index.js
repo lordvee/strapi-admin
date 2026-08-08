@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Text } from '@buffetjs/core';
-import { Tooltip } from '@buffetjs/styles';
+import { Text } from '@punch-in/buffet-modern-core';
+import { Tooltip } from '@punch-in/buffet-modern-styles';
 import { ProviderButtonWrapper, ProviderLink } from './ProviderButtonStyles';
 
 const ProviderButton = ({ provider }) => {

@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { BaselineAlignment, auth, Select, Option } from 'strapi-helper-plugin';
-import { Padded, Text } from '@buffetjs/core';
+import { Padded, Text } from '@punch-in/buffet-modern-core';
 import { Col } from 'reactstrap';
 import { get } from 'lodash';
 import { useIntl } from 'react-intl';

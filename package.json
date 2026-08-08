@@ -1,32 +1,4 @@
 {
-  "_from": "@punch-in/strapi-admin@1.0.7",
-  "_id": "@punch-in/strapi-admin@1.0.7",
-  "_inBundle": false,
-  "_integrity": "sha512-vZHb6idFlbOpAC42Wo8Accfr8zZzhN9F+ZsQHo3tJ/2Uv+O7NzLDmqqFYVPewwsJDP+GnNrslbuAnyhRb1naAQ==",
-  "_location": "/@punch-in/strapi-admin",
-  "_phantomChildren": {
-    "is-docker": "2.2.1",
-    "side-channel": "1.0.4"
-  },
-  "_requested": {
-    "type": "version",
-    "registry": true,
-    "raw": "@punch-in/strapi-admin@1.0.7",
-    "name": "@punch-in/strapi-admin",
-    "escapedName": "@punch-in%2fstrapi-admin",
-    "scope": "@punch-in",
-    "rawSpec": "1.0.7",
-    "saveSpec": null,
-    "fetchSpec": "1.0.7"
-  },
-  "_requiredBy": [
-    "#USER",
-    "/"
-  ],
-  "_resolved": "https://registry.npmjs.org/@punch-in/strapi-admin/-/strapi-admin-1.0.7.tgz",
-  "_shasum": "c9a871c9979dd7a61a7dcb313f53a0cfff7230fd",
-  "_spec": "@punch-in/strapi-admin@1.0.7",
-  "_where": "/webapps/strapiProject/3.6.8/defaultProject",
   "author": {
     "name": "Strapi"
   },
@@ -45,12 +17,12 @@
     "@babel/preset-env": "^7.13.15",
     "@babel/preset-react": "^7.13.13",
     "@babel/runtime": "^7.13.17",
-    "@buffetjs/core": "3.3.8",
-    "@buffetjs/custom": "3.3.8",
-    "@buffetjs/hooks": "3.3.8",
-    "@buffetjs/icons": "3.3.8",
-    "@buffetjs/styles": "3.3.8",
-    "@buffetjs/utils": "3.3.8",
+    "@punch-in/buffet-modern-core": "^3.3.8",
+    "@punch-in/buffet-modern-custom": "^3.3.8",
+    "@punch-in/buffet-modern-hooks": "^3.3.8",
+    "@punch-in/buffet-modern-icons": "^3.3.8",
+    "@punch-in/buffet-modern-styles": "^3.3.8",
+    "@punch-in/buffet-modern-utils": "^3.3.8",
     "@casl/ability": "^4.1.5",
     "@fingerprintjs/fingerprintjs": "3.1.1",
     "@fortawesome/fontawesome-free": "^5.15.3",
@@ -136,7 +108,6 @@
     "webpackbar": "^4.0.0",
     "yup": "^0.32.9"
   },
-  "deprecated": false,
   "description": "Punch-in Admin",
   "devDependencies": {
     "webpack-bundle-analyzer": "4.4.0"
@@ -168,5 +139,5 @@
     "develop:ce": "STRAPI_DISABLE_EE=true webpack-dev-server --config webpack.config.dev.js",
     "test": "echo \"no tests yet\""
   },
-  "version": "1.0.7"
+  "version": "1.0.8"
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
-import { Padded } from '@buffetjs/core';
+import { Padded } from '@punch-in/buffet-modern-core';
 import { get } from 'lodash';
 import PropTypes from 'prop-types';
 import { BaselineAlignment } from 'strapi-helper-plugin';

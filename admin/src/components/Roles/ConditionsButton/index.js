@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
-import { Flex, Text, Padded } from '@buffetjs/core';
+import { Flex, Text, Padded } from '@punch-in/buffet-modern-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import Wrapper from './Wrapper';

@@ -6,9 +6,9 @@
 
 import React, { useEffect, useReducer, useRef, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-import { Header, List } from '@buffetjs/custom';
-import { Button } from '@buffetjs/core';
-import { Plus } from '@buffetjs/icons';
+import { Header, List } from '@punch-in/buffet-modern-custom';
+import { Button } from '@punch-in/buffet-modern-core';
+import { Plus } from '@punch-in/buffet-modern-icons';
 import { omit } from 'lodash';
 import { useIntl } from 'react-intl';
 import {

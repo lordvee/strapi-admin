@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Button as Base } from '@buffetjs/core';
+import { Button as Base } from '@punch-in/buffet-modern-core';
 
 const Button = styled(Base)`
   width: 100%;

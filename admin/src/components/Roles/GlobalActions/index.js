@@ -1,7 +1,7 @@
 import React, { memo, useMemo } from 'react';
 import { get } from 'lodash';
 import PropTypes from 'prop-types';
-import { Flex } from '@buffetjs/core';
+import { Flex } from '@punch-in/buffet-modern-core';
 import { useIntl } from 'react-intl';
 import IS_DISABLED from 'ee_else_ce/components/Roles/GlobalActions/utils/constants';
 import { usePermissionsDataManager } from '../../../hooks';

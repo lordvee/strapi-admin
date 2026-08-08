@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { BaselineAlignment, ModalSection, request } from 'strapi-helper-plugin';
 import { useIntl } from 'react-intl';
 import { get } from 'lodash';
-import { Padded, Text } from '@buffetjs/core';
+import { Padded, Text } from '@punch-in/buffet-modern-core';
 import { Row } from 'reactstrap';
 import MagicLink from 'ee_else_ce/components/Users/MagicLink';
 

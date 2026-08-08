@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { useTheme } from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useIntl } from 'react-intl';
-import { Flex, Padded, Separator } from '@buffetjs/core';
-import { LoadingIndicator, Tooltip } from '@buffetjs/styles';
-import { Dots } from '@buffetjs/icons';
+import { Flex, Padded, Separator } from '@punch-in/buffet-modern-core';
+import { LoadingIndicator, Tooltip } from '@punch-in/buffet-modern-styles';
+import { Dots } from '@punch-in/buffet-modern-icons';
 import { BaselineAlignment } from 'strapi-helper-plugin';
 
 import BaseLogin from '../../../../../../admin/src/containers/AuthPage/components/Login/BaseLogin';

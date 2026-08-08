@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { Padded } from '@buffetjs/core';
+import { Padded } from '@punch-in/buffet-modern-core';
 import generateHeadersFromActions from './utils/generateHeadersFromActions';
 import Header from './Header';
 import ActionRow from './ActionRow';

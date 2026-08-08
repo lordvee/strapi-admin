@@ -5,7 +5,7 @@
  */
 
 import styled from 'styled-components';
-import { sizes } from '@buffetjs/styles';
+import { sizes } from '@punch-in/buffet-modern-styles';
 
 const Wrapper = styled.div`
   margin-top: 12px;

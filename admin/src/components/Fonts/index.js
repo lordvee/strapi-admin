@@ -8,21 +8,21 @@ import faSolidHeavy from '@fortawesome/fontawesome-free/webfonts/fa-solid-900.wo
 import faSolidHeavy2 from '@fortawesome/fontawesome-free/webfonts/fa-solid-900.woff2';
 
 /* Lato Regular */
-import latoRegular from '@buffetjs/styles/webfonts/Lato-Regular.ttf';
-import latoRegularWoff from '@buffetjs/styles/webfonts/Lato-Regular.woff';
-import latoRegularWoff2 from '@buffetjs/styles/webfonts/Lato-Regular.woff2';
+import latoRegular from '@punch-in/buffet-modern-styles/webfonts/Lato-Regular.ttf';
+import latoRegularWoff from '@punch-in/buffet-modern-styles/webfonts/Lato-Regular.woff';
+import latoRegularWoff2 from '@punch-in/buffet-modern-styles/webfonts/Lato-Regular.woff2';
 /* Lato SemiBold */
-import latoSemiBold from '@buffetjs/styles/webfonts/Lato-SemiBold.ttf';
-import latoSemiBoldWoff from '@buffetjs/styles/webfonts/Lato-SemiBold.woff';
-import latoSemiBoldWoff2 from '@buffetjs/styles/webfonts/Lato-SemiBold.woff2';
+import latoSemiBold from '@punch-in/buffet-modern-styles/webfonts/Lato-SemiBold.ttf';
+import latoSemiBoldWoff from '@punch-in/buffet-modern-styles/webfonts/Lato-SemiBold.woff';
+import latoSemiBoldWoff2 from '@punch-in/buffet-modern-styles/webfonts/Lato-SemiBold.woff2';
 /* Lato Bold */
-import latoBold from '@buffetjs/styles/webfonts/Lato-Bold.ttf';
-import latoBoldWoff from '@buffetjs/styles/webfonts/Lato-Bold.woff';
-import latoBoldWoff2 from '@buffetjs/styles/webfonts/Lato-Bold.woff2';
+import latoBold from '@punch-in/buffet-modern-styles/webfonts/Lato-Bold.ttf';
+import latoBoldWoff from '@punch-in/buffet-modern-styles/webfonts/Lato-Bold.woff';
+import latoBoldWoff2 from '@punch-in/buffet-modern-styles/webfonts/Lato-Bold.woff2';
 /* Lato Black */
-import latoBlack from '@buffetjs/styles/webfonts/Lato-Black.ttf';
-import latoBlackWoff from '@buffetjs/styles/webfonts/Lato-Black.woff';
-import latoBlackWoff2 from '@buffetjs/styles/webfonts/Lato-Black.woff2';
+import latoBlack from '@punch-in/buffet-modern-styles/webfonts/Lato-Black.ttf';
+import latoBlackWoff from '@punch-in/buffet-modern-styles/webfonts/Lato-Black.woff';
+import latoBlackWoff2 from '@punch-in/buffet-modern-styles/webfonts/Lato-Black.woff2';
 
 const Fonts = createGlobalStyle`
   @font-face {

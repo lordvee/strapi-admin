@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { Text } from '@buffetjs/core';
-import { Arrow } from '@buffetjs/icons';
+import { Text } from '@punch-in/buffet-modern-core';
+import { Arrow } from '@punch-in/buffet-modern-icons';
 
 const LinkText = styled(Text)`
   color: ${({ theme }) => theme.main.colors.mediumBlue};

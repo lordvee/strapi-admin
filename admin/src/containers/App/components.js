@@ -5,7 +5,7 @@ const Wrapper = styled.div`
   font-size: 1.4rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #292b2c;
+  color: #004a99;
   background: linear-gradient(to bottom, #ffffff, #E3F2FD);
   height: 100vh;
 `;

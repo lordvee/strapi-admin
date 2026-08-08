@@ -7,8 +7,8 @@
 import React, { useEffect, useMemo, useReducer, useRef, useState } from 'react';
 import { useHistory, useRouteMatch } from 'react-router-dom';
 import { get, isEmpty, isEqual, omit } from 'lodash';
-import { Header, Inputs as InputsIndex } from '@buffetjs/custom';
-import { Play } from '@buffetjs/icons';
+import { Header, Inputs as InputsIndex } from '@punch-in/buffet-modern-custom';
+import { Play } from '@punch-in/buffet-modern-icons';
 import {
   request,
   useGlobalContext,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Padded, Text } from '@buffetjs/core';
+import { Padded, Text } from '@punch-in/buffet-modern-core';
 import PropTypes from 'prop-types';
 
 const InfoText = ({ content }) => {

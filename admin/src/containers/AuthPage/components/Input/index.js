@@ -1,5 +1,5 @@
 import React from 'react';
-import { Inputs } from '@buffetjs/custom';
+import { Inputs } from '@punch-in/buffet-modern-custom';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
 

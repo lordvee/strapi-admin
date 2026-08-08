@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { CustomRow } from '@buffetjs/styles';
-import { IconLinks, Text } from '@buffetjs/core';
+import { CustomRow } from '@punch-in/buffet-modern-styles';
+import { IconLinks, Text } from '@punch-in/buffet-modern-core';
 import { useIntl } from 'react-intl';
 
 import RoleDescription from './RoleDescription';

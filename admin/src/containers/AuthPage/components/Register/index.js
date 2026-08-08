@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react';
-import { Checkbox, Flex, Padded, Text } from '@buffetjs/core';
+import { Checkbox, Flex, Padded, Text } from '@punch-in/buffet-modern-core';
 import { useIntl, FormattedMessage } from 'react-intl';
 import { get } from 'lodash';
 import PropTypes from 'prop-types';

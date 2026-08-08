@@ -1,4 +1,4 @@
-import { Checkbox as Base } from '@buffetjs/core';
+import { Checkbox as Base } from '@punch-in/buffet-modern-core';
 import styled from 'styled-components';
 
 const CustomCheckbox = styled(Base)`

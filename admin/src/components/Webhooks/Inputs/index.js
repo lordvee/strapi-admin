@@ -6,8 +6,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { ErrorMessage, Label } from '@buffetjs/styles';
-import { Error } from '@buffetjs/core';
+import { ErrorMessage, Label } from '@punch-in/buffet-modern-styles';
+import { Error } from '@punch-in/buffet-modern-core';
 import HeadersInput from '../HeadersInput';
 import EventInput from '../EventInput';
 import Wrapper from './Wrapper';

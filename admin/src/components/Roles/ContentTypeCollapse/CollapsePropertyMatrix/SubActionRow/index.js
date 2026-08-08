@@ -1,7 +1,7 @@
 import React, { memo, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
-import { Flex, Text } from '@buffetjs/core';
+import { Flex, Text } from '@punch-in/buffet-modern-core';
 import styled from 'styled-components';
 import IS_DISABLED from 'ee_else_ce/components/Roles/ContentTypeCollapse/CollapsePropertyMatrix/SubActionRow/utils/constants';
 import { usePermissionsDataManager } from '../../../../../hooks';

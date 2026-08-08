@@ -1,5 +1,5 @@
 import React from 'react';
-import { Remove } from '@buffetjs/icons';
+import { Remove } from '@punch-in/buffet-modern-icons';
 import { components } from 'react-select';
 
 const ClearIndicator = props => {

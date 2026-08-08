@@ -4,8 +4,8 @@ import CreatableSelect from 'react-select/creatable';
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
 import { CircleButton } from 'strapi-helper-plugin';
-import { InputText } from '@buffetjs/core';
-import { Plus } from '@buffetjs/icons';
+import { InputText } from '@punch-in/buffet-modern-core';
+import { Plus } from '@punch-in/buffet-modern-icons';
 
 import getBorderColor from './utils/getBorderColor';
 import keys from './keys';

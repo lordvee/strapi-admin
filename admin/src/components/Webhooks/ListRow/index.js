@@ -6,7 +6,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Checkbox, IconLinks } from '@buffetjs/core';
+import { Checkbox, IconLinks } from '@punch-in/buffet-modern-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencilAlt, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 

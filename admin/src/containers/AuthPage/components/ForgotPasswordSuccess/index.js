@@ -1,5 +1,5 @@
 import React from 'react';
-import { Padded, Text } from '@buffetjs/core';
+import { Padded, Text } from '@punch-in/buffet-modern-core';
 import { useIntl } from 'react-intl';
 import { useHistory } from 'react-router-dom';
 import { BaselineAlignment } from 'strapi-helper-plugin';

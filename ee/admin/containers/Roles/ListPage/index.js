@@ -1,8 +1,8 @@
 import React, { useEffect, useReducer, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Button } from '@buffetjs/core';
-import { List, Header } from '@buffetjs/custom';
-import { Plus } from '@buffetjs/icons';
+import { Button } from '@punch-in/buffet-modern-core';
+import { List, Header } from '@punch-in/buffet-modern-custom';
+import { Plus } from '@punch-in/buffet-modern-icons';
 import matchSorter from 'match-sorter';
 import { get } from 'lodash';
 import {

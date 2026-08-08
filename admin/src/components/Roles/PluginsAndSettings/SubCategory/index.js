@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { Flex, Padded, Text, Checkbox } from '@buffetjs/core';
+import { Flex, Padded, Text, Checkbox } from '@punch-in/buffet-modern-core';
 import { useIntl } from 'react-intl';
 import { BaselineAlignment } from 'strapi-helper-plugin';
 import { get } from 'lodash';

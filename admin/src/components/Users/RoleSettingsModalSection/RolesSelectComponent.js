@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
-import { Padded } from '@buffetjs/core';
-import { Label, Description as BaseDescription } from '@buffetjs/styles';
+import { Padded } from '@punch-in/buffet-modern-core';
+import { Label, Description as BaseDescription } from '@punch-in/buffet-modern-styles';
 import { Col } from 'reactstrap';
 import styled from 'styled-components';
 

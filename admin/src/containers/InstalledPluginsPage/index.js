@@ -1,6 +1,6 @@
 import React from 'react';
 import { useGlobalContext, request } from 'strapi-helper-plugin';
-import { Header, List } from '@buffetjs/custom';
+import { Header, List } from '@punch-in/buffet-modern-custom';
 import PageTitle from '../../components/PageTitle';
 import ContainerFluid from '../../components/ContainerFluid';
 import ListWrapper from './ListWrapper';

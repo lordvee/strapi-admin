@@ -9,7 +9,7 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Lato';
     font-size: 1.4rem;
     line-height: 1.5;
-    color: #292b2c;
+    color: #004a99;
   }
 
   * {
@@ -139,20 +139,20 @@ const GlobalStyle = createGlobalStyle`
   }
 
   ::-webkit-scrollbar-track {
-    background-color: #eee;
+    background-color: #ffffff;
   }
 
   ::-webkit-scrollbar-track:hover {
-    background-color: #ddd;
+    background-color: #ffffff;
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: #ccc;
+    background-color: #007eff;
     border-radius: 0.5rem;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background-color: #bbb;
+    background-color: #007eff;
   }
 
   ::-webkit-scrollbar-button {
@@ -162,7 +162,7 @@ const GlobalStyle = createGlobalStyle`
   /* firefox scrollbar */
   /* stylelint-disable */
   * {
-    scrollbar-color: #bbb #eee;
+    scrollbar-color: #ffffff #007eff;
     scrollbar-width: thin;
   }
   /* stylelint-enable */

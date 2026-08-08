@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Header as PluginHeader } from '@buffetjs/custom';
+import { Header as PluginHeader } from '@punch-in/buffet-modern-custom';
 import { isEqual } from 'lodash';
 import { useIntl } from 'react-intl';
 import PropTypes from 'prop-types';

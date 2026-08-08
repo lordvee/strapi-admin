@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Button } from '@buffetjs/core';
+import { Button } from '@punch-in/buffet-modern-core';
 import { Modal, ModalFooter, ModalHeader, useGlobalContext } from 'strapi-helper-plugin';
 import stepper from './stepper';
 

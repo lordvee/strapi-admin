@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 import { isObject } from 'lodash';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Remove } from '@buffetjs/icons';
+import { Remove } from '@punch-in/buffet-modern-icons';
 import Li, { GlobalNotification } from './Li';
 
 class Notification extends React.Component {

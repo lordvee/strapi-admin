@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { LoadingIndicatorPage, useGlobalContext, request } from 'strapi-helper-plugin';
-import { Header } from '@buffetjs/custom';
+import { Header } from '@punch-in/buffet-modern-custom';
 import { useHistory } from 'react-router-dom';
 
 import { useFetchPluginsFromMarketPlace } from '../../hooks';

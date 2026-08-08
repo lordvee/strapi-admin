@@ -1,6 +1,6 @@
 /* eslint-disable indent */
 import styled from 'styled-components';
-import { Flex } from '@buffetjs/core';
+import { Flex } from '@punch-in/buffet-modern-core';
 import { activeStyle } from '../../utils';
 import Chevron from '../../../Chevron';
 

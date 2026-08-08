@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Option } from '@buffetjs/core';
+import { Option } from '@punch-in/buffet-modern-core';
 
 const StyledOption = styled(Option)`
   > span {

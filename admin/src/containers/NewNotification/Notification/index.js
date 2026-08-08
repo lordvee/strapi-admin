@@ -1,10 +1,10 @@
 import React, { useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { Padded, Text, Flex } from '@buffetjs/core';
+import { Padded, Text, Flex } from '@punch-in/buffet-modern-core';
 import { useIntl } from 'react-intl';
 import { useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Remove } from '@buffetjs/icons';
+import { Remove } from '@punch-in/buffet-modern-icons';
 
 import { HIDE_NEW_NOTIFICATION } from '../constants';
 import { NotificationWrapper, IconWrapper, LinkArrow, RemoveWrapper } from './styledComponents';

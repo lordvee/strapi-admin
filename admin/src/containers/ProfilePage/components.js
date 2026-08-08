@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Label } from '@buffetjs/core';
+import { Label } from '@punch-in/buffet-modern-core';
 
 const ProfilePageLabel = styled(Label)`
   margin-bottom: 1rem;

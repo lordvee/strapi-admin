@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
-import { Option, Text } from '@buffetjs/core';
+import { Option, Text } from '@punch-in/buffet-modern-core';
 
 const Filter = ({ displayName, filter, name, onClick, value }) => {
   const { formatMessage } = useIntl();

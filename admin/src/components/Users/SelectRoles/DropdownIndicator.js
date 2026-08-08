@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Flex } from '@buffetjs/core';
+import { Flex } from '@punch-in/buffet-modern-core';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 

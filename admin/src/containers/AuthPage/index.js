@@ -3,7 +3,7 @@ import axios from 'axios';
 import { camelCase, get, omit, upperFirst } from 'lodash';
 import { Redirect, useRouteMatch, useHistory } from 'react-router-dom';
 import { BaselineAlignment, auth, useQuery } from 'strapi-helper-plugin';
-import { Padded } from '@buffetjs/core';
+import { Padded } from '@punch-in/buffet-modern-core';
 import PropTypes from 'prop-types';
 import forms from 'ee_else_ce/containers/AuthPage/utils/forms';
 

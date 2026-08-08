@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { themePropTypes } from 'strapi-helper-plugin';
-import { Text } from '@buffetjs/core';
+import { Text } from '@punch-in/buffet-modern-core';
 
 const ListWrapper = styled(props => <Text as="ul" fontSize="md" {...props} />)`
   margin-bottom: 0;

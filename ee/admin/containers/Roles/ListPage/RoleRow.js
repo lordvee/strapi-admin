@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useGlobalContext } from 'strapi-helper-plugin';
 import { useHistory } from 'react-router-dom';
-import { Pencil, Duplicate } from '@buffetjs/icons';
+import { Pencil, Duplicate } from '@punch-in/buffet-modern-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { RoleRow as RoleRowBase } from '../../../../../admin/src/components/Roles';
 import Checkbox from './CustomCheckbox';

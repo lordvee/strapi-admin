@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import { Text } from '@buffetjs/core';
+import { Text } from '@punch-in/buffet-modern-core';
 import { FormattedMessage } from 'react-intl';
 import { useGlobalContext } from 'strapi-helper-plugin';
 import Icon from './Icon';

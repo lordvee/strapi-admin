@@ -1,7 +1,7 @@
 import React, { memo, useState, useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { get } from 'lodash';
-import { Padded, Flex } from '@buffetjs/core';
+import { Padded, Flex } from '@punch-in/buffet-modern-core';
 import IS_DISABLED from 'ee_else_ce/components/Roles/ContentTypeCollapse/CollapsePropertyMatrix/ActionRow/utils/constants';
 import { usePermissionsDataManager } from '../../../../../hooks';
 import { getCheckboxState } from '../../../utils';

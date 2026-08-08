@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useIntl } from 'react-intl';
-import { Button, Flex, Text, Padded } from '@buffetjs/core';
+import { Button, Flex, Text, Padded } from '@punch-in/buffet-modern-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import NumberCard from './NumberCard';

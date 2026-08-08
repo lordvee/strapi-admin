@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
-import { Checkbox, Text } from '@buffetjs/core';
+import { Checkbox, Text } from '@punch-in/buffet-modern-core';
 import CollapseLabel from '../CollapseLabel';
 import Wrapper from './Wrapper';
 

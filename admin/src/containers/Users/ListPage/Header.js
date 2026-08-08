@@ -1,9 +1,9 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { useGlobalContext } from 'strapi-helper-plugin';
-import { Button } from '@buffetjs/core';
-import { Header as HeaderCompo } from '@buffetjs/custom';
-import { Envelope } from '@buffetjs/icons';
+import { Button } from '@punch-in/buffet-modern-core';
+import { Header as HeaderCompo } from '@punch-in/buffet-modern-custom';
+import { Envelope } from '@punch-in/buffet-modern-icons';
 
 const Header = ({
   canCreate,

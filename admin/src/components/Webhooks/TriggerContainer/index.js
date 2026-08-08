@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { Fail, Success, Pending, Remove } from '@buffetjs/icons';
+import { Fail, Success, Pending, Remove } from '@punch-in/buffet-modern-icons';
 
 import Wrapper from './Wrapper';
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { IconLinks, Text } from '@buffetjs/core';
-import { CustomRow } from '@buffetjs/styles';
+import { IconLinks, Text } from '@punch-in/buffet-modern-core';
+import { CustomRow } from '@punch-in/buffet-modern-styles';
 import { useGlobalContext, PopUpWarning, CheckPermissions } from 'strapi-helper-plugin';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';

@@ -1,6 +1,6 @@
 import React, { useReducer, useEffect } from 'react';
-import { Checkbox, Button, Flex, Padded, Separator } from '@buffetjs/core';
-import { LoadingIndicator } from '@buffetjs/styles';
+import { Checkbox, Button, Flex, Padded, Separator } from '@punch-in/buffet-modern-core';
+import { LoadingIndicator } from '@punch-in/buffet-modern-styles';
 import { useIntl } from 'react-intl';
 import { get } from 'lodash';
 import PropTypes from 'prop-types';

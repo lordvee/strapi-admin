@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flex, Padded, Text } from '@buffetjs/core';
+import { Flex, Padded, Text } from '@punch-in/buffet-modern-core';
 import { BaselineAlignment, LoadingIndicator, Row } from 'strapi-helper-plugin';
 import PropTypes from 'prop-types';
 import Bloc from '../Bloc';

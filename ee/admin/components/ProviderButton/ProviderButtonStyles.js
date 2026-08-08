@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import styled from 'styled-components';
-import { Flex, Text } from '@buffetjs/core';
+import { Flex, Text } from '@punch-in/buffet-modern-core';
 
 export const ProviderButtonWrapper = styled(props => <Flex {...props} />)`
   width: 11rem;

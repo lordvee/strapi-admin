@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Padded } from '@buffetjs/core';
+import { Padded } from '@punch-in/buffet-modern-core';
 import ListWrapper from './ListWrapper';
 import PermissionRow from './Row';
 

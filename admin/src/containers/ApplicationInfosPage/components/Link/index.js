@@ -1,5 +1,5 @@
 import React from 'react';
-import { Padded } from '@buffetjs/core';
+import { Padded } from '@punch-in/buffet-modern-core';
 import PropTypes from 'prop-types';
 import { BaselineAlignment } from 'strapi-helper-plugin';
 import LinkText, { LinkArrow } from './components';

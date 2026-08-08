@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { PageFooter } from 'strapi-helper-plugin';
-import { Padded } from '@buffetjs/core';
+import { Padded } from '@punch-in/buffet-modern-core';
 import Wrapper from './Wrapper';
 
 const Footer = ({ count, onChange, params }) => {

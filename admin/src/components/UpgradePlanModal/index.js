@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Padded, Text } from '@buffetjs/core';
+import { Button, Padded, Text } from '@punch-in/buffet-modern-core';
 import { Modal } from 'strapi-helper-plugin';
 import { useIntl } from 'react-intl';
 import { Arrow, Download, Option, Wrapper } from './components';

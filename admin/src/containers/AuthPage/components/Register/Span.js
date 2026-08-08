@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Text } from '@buffetjs/core';
+import { Text } from '@punch-in/buffet-modern-core';
 
 const Span = styled(Text)`
   color: #0097f7;

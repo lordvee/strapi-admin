@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { components } from 'react-select';
-import { Text } from '@buffetjs/core';
+import { Text } from '@punch-in/buffet-modern-core';
 import { useIntl } from 'react-intl';
 import { createArrayOfValues } from '../../utils';
 
