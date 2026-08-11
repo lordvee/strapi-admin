@@ -12,7 +12,7 @@ const Header = styled.div`
   height: ${props => props.theme.main.sizes.header.height};
 
   position: fixed;
-  z-index: -10;
+  z-index: 1040;
   left: ${props => props.theme.main.sizes.leftMenu.width};
 
   box-shadow: 0 1px 2px 0 rgba(40, 42, 49, 0.16);
