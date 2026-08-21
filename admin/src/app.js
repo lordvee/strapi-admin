@@ -55,6 +55,39 @@ import history from './utils/history';
 
 import plugins from './plugins';
 
+// Retry on 504 (Gateway Timeout): the tenant Lambda backends occasionally hit
+// a concurrent cold-start race (multiple containers contending for the same
+// SQLite file - SQLITE_BUSY) where the Lambda crashes before doing any work
+// at all, surfaced to the browser as a 504. That's almost always transient -
+// a follow-up request a few seconds later succeeds once one container wins.
+//
+// Installed once, globally, here at the app's entry point (before anything
+// else runs) rather than inside strapi-helper-plugin's request() - that
+// package only ships a prebuilt dist bundle with no source to patch, and
+// request() calls window.fetch directly, so wrapping fetch here covers every
+// request() call (and any other direct fetch caller) with zero changes to
+// strapi-helper-plugin or any of its hundreds of call sites.
+//
+// Note: this retries every method, including POST/PUT/DELETE. A 504 here has
+// only ever been observed as "the Lambda crashed before it did anything"
+// (see above), not "the write succeeded but the response was lost" - but
+// that's this app's specific failure mode, not a general guarantee, so it's
+// worth knowing if this ever gets reused somewhere with different backend
+// behavior.
+const RETRY_DELAYS_MS = [2000, 4000, 8000];
+const nativeFetch = window.fetch.bind(window);
+
+window.fetch = async (...args) => {
+  let response = await nativeFetch(...args);
+
+  for (let i = 0; response.status === 504 && i < RETRY_DELAYS_MS.length; i += 1) {
+    await new Promise(resolve => setTimeout(resolve, RETRY_DELAYS_MS[i]));
+    response = await nativeFetch(...args);
+  }
+
+  return response;
+};
+
 const strapi = Strapi();
 
 const pluginsReducers = {};
