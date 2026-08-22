@@ -257,4 +257,161 @@ const SocialLinkWrapper = styled.div`
   }
 `;
 
-export { ALink, Block, Container, LinkWrapper, P, Separator, SocialLinkWrapper, Wave };
+const SiteNav = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+`;
+
+const SiteStrip = styled.div`
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  flex: 1;
+  min-width: 0;
+  padding: 4px 2px 8px;
+  scroll-behavior: smooth;
+
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #c0c4cc;
+    border-radius: 3px;
+  }
+`;
+
+const SiteTab = styled.button`
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 auto;
+  height: 34px;
+  padding: 0 12px;
+  border: 1px solid ${props => (props.$active ? '#007eff' : '#e3e9f3')};
+  border-radius: 17px;
+  background: ${props => (props.$active ? '#007eff' : '#ffffff')};
+  color: ${props => (props.$active ? '#ffffff' : '#333740')};
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+
+  em {
+    font-style: normal;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    border-radius: 9px;
+    background: ${props => (props.$active ? 'rgba(255,255,255,0.2)' : '#f0f3f8')};
+    font-size: 11px;
+    line-height: 18px;
+    text-align: center;
+  }
+`;
+
+const SiteNavBtn = styled.button`
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+  border: 1px solid #e3e9f3;
+  border-radius: 4px;
+  background: #ffffff;
+  color: #007eff;
+  cursor: pointer;
+
+  &:hover {
+    background: #f7f8f8;
+  }
+`;
+
+const PunchList = styled.div`
+  max-height: 360px;
+  overflow-y: auto;
+`;
+
+const PunchRow = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #f0f3f8;
+
+  &:last-child {
+    border-bottom: none;
+  }
+`;
+
+const PunchMeta = styled.div`
+  min-width: 0;
+`;
+
+const PunchName = styled.div`
+  font-size: 14px;
+  font-weight: 600;
+  color: #333740;
+`;
+
+const PunchTimes = styled.div`
+  display: flex;
+  gap: 14px;
+  margin-top: 4px;
+  font-size: 12px;
+  color: #5c5f66;
+
+  svg {
+    margin-right: 4px;
+    color: #007eff;
+  }
+`;
+
+const PunchAction = styled.div`
+  flex: 0 0 auto;
+`;
+
+const EmptyPunch = styled.p`
+  margin: 8px 0 0;
+  color: #5c5f66;
+  font-size: 14px;
+`;
+
+const StatusPill = styled.span`
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 28px;
+  padding: 0 10px;
+  border-radius: 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: ${props => (props.$ok ? '#27b97c' : '#8e8ea9')};
+  background: ${props => (props.$ok ? '#eafbe7' : '#f0f3f8')};
+`;
+
+const ApproveBtn = styled.button`
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 12px;
+  border: none;
+  border-radius: 4px;
+  background: #007eff;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: default;
+  }
+
+  &:hover:not(:disabled) {
+    background: #005fea;
+  }
+`;
+
+export { ALink, Block, Container, LinkWrapper, P, Separator, SocialLinkWrapper, Wave, SiteStrip, SiteTab, SiteNav, SiteNavBtn, PunchList, PunchRow, PunchMeta, PunchName, PunchTimes, PunchAction, EmptyPunch, StatusPill, ApproveBtn };
