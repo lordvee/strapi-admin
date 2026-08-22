@@ -1,21 +1,24 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap');
+
   html {
     font-size: 62.5%;
   }
 
   body {
-    font-family: 'Lato';
+    font-family: 'Inter', 'Lato', sans-serif;
     font-size: 1.4rem;
     line-height: 1.5;
     color: #004a99;
+    background-color: #f8fafc;
   }
 
   * {
     -webkit-font-smoothing: antialiased;
     box-sizing: border-box;
-    font-family: 'Lato';
+    font-family: 'Inter', 'Lato', sans-serif;
   }
 
   h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {

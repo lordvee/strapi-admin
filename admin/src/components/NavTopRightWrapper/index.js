@@ -1,11 +1,12 @@
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const NavTopRightWrapper = styled.div`
   position: fixed;
   top: 0;
   right: 0;
   display: flex;
-  background-color: #007eff;
+  background-color: ${props => props.theme.main.colors.mediumBlue};
   color: #fff;
   width: 100%;
   justify-content: space-between;
@@ -16,5 +17,19 @@ const NavTopRightWrapper = styled.div`
      of this bar renders underneath the main content area and is invisible/unclickable. */
   z-index: 15;
 `;
+
+NavTopRightWrapper.defaultProps = {
+  theme: {
+    main: {
+      colors: {
+        mediumBlue: '#006fe6',
+      },
+    },
+  },
+};
+
+NavTopRightWrapper.propTypes = {
+  theme: PropTypes.object,
+};
 
 export default NavTopRightWrapper;
