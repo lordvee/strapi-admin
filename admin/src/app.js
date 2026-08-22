@@ -61,6 +61,18 @@ import plugins from './plugins';
 // at all, surfaced to the browser as a 504. That's almost always transient -
 // a follow-up request a few seconds later succeeds once one container wins.
 //
+// Also retries on a *rejected* fetch, not just a resolved 504: API Gateway's
+// own gateway-generated error responses (this same 504, plus throttles etc.)
+// never reach Strapi, so its CORS middleware never adds the usual headers -
+// the browser then discards the cross-origin response as a CORS failure and
+// fetch() rejects instead of resolving with the status code, invisible to
+// the `response.status === 504` check below. (The per-tenant CloudFormation
+// template's GatewayResponseDefault4xx/5xx now add a CORS header to those
+// gateway-generated responses too, so this should mostly stop happening -
+// this is a second, independent safety net for whatever slips through, e.g.
+// a genuinely dropped connection that never got any response to add headers
+// to in the first place.)
+//
 // Installed once, globally, here at the app's entry point (before anything
 // else runs) rather than inside strapi-helper-plugin's request() - that
 // package only ships a prebuilt dist bundle with no source to patch, and
@@ -68,21 +80,35 @@ import plugins from './plugins';
 // request() call (and any other direct fetch caller) with zero changes to
 // strapi-helper-plugin or any of its hundreds of call sites.
 //
-// Note: this retries every method, including POST/PUT/DELETE. A 504 here has
-// only ever been observed as "the Lambda crashed before it did anything"
-// (see above), not "the write succeeded but the response was lost" - but
-// that's this app's specific failure mode, not a general guarantee, so it's
-// worth knowing if this ever gets reused somewhere with different backend
-// behavior.
+// Note: this retries every method, including POST/PUT/DELETE. A 504 (or a
+// rejected fetch) here has only ever been observed as "the Lambda crashed
+// before it did anything" (see above), not "the write succeeded but the
+// response was lost" - but that's this app's specific failure mode, not a
+// general guarantee, so it's worth knowing if this ever gets reused
+// somewhere with different backend behavior.
 const RETRY_DELAYS_MS = [2000, 4000, 8000];
 const nativeFetch = window.fetch.bind(window);
 
-window.fetch = async (...args) => {
-  let response = await nativeFetch(...args);
+const attemptFetch = (...args) =>
+  nativeFetch(...args).then(
+    response => ({ response }),
+    error => ({ error })
+  );
 
-  for (let i = 0; response.status === 504 && i < RETRY_DELAYS_MS.length; i += 1) {
+window.fetch = async (...args) => {
+  let { response, error } = await attemptFetch(...args);
+
+  for (
+    let i = 0;
+    (error || response.status === 504) && i < RETRY_DELAYS_MS.length;
+    i += 1
+  ) {
     await new Promise(resolve => setTimeout(resolve, RETRY_DELAYS_MS[i]));
-    response = await nativeFetch(...args);
+    ({ response, error } = await attemptFetch(...args));
+  }
+
+  if (error) {
+    throw error;
   }
 
   return response;
