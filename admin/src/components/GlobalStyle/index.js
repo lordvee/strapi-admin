@@ -142,20 +142,20 @@ const GlobalStyle = createGlobalStyle`
   }
 
   ::-webkit-scrollbar-track {
-    background-color: #ffffff;
+    background-color: transparent;
   }
 
   ::-webkit-scrollbar-track:hover {
-    background-color: #ffffff;
+    background-color: transparent;
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: #007eff;
+    background-color: #c0c4cc;
     border-radius: 0.5rem;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background-color: #007eff;
+    background-color: #a6acb8;
   }
 
   ::-webkit-scrollbar-button {
@@ -165,7 +165,7 @@ const GlobalStyle = createGlobalStyle`
   /* firefox scrollbar */
   /* stylelint-disable */
   * {
-    scrollbar-color: #ffffff #007eff;
+    scrollbar-color: #c0c4cc transparent;
     scrollbar-width: thin;
   }
   /* stylelint-enable */

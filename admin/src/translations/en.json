@@ -54,7 +54,7 @@
   "HomePage.community": "Join Punch-in Community",
   "HomePage.greetings": "Hi {name}!",
   "HomePage.helmet.title": "Homepage",
-  "HomePage.punchIn.title": "Punched in today",
+  "HomePage.punchIn.title": "Attendance recorded",
   "HomePage.punchIn.subtitle": "{count} {count, plural, one {person} other {people}} clocked in · grouped by site",
   "HomePage.punchIn.loading": "Loading today's punch-ins…",
   "HomePage.punchIn.empty": "No one has punched in yet today.",

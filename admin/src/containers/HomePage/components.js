@@ -329,6 +329,7 @@ const SiteNavBtn = styled.button`
 const PunchList = styled.div`
   max-height: 360px;
   overflow-y: auto;
+  padding-right: 10px;
 `;
 
 const PunchRow = styled.div`
