@@ -4,6 +4,16 @@ const passport = require('koa-passport');
 const compose = require('koa-compose');
 const crypto = require('crypto');
 const axios = require('axios');
+const { LambdaClient, InvokeCommand } = require('@aws-sdk/client-lambda');
+
+// Tenant Lambdas run inside a VPC with no internet route (required for the
+// EFS mount - see CLAUDE.md). Reaching the central stripe-charge Lambda
+// therefore goes through the VPC Interface Endpoint for the Lambda service
+// (infra/shared-networking-stack.yaml) via a direct SDK invoke, not HTTPS.
+// See features/API-REDESIGN.md Phase 1. The SDK v3 client-lambda package is
+// preinstalled by the Node.js 18+ Lambda managed runtime, so it does not
+// need to be bundled in strapi-lambda-layer.
+const lambdaClient = new LambdaClient({});
 
 const {
   validateRegistrationInput,
@@ -190,6 +200,14 @@ module.exports = {
   // against *this* tenant's admin_users - never creating one.
 
   async ssoProviders(ctx) {
+    // SSO_PROVIDERS_MODE=invoke is the new path (see features/API-REDESIGN.md
+    // Phase 1); anything else keeps the old HTTPS call so this can be rolled
+    // back per-tenant without a redeploy while the invoke path is verified.
+    if (process.env.SSO_PROVIDERS_MODE === 'invoke') {
+      ctx.body = await fetchSsoProvidersViaInvoke();
+      return;
+    }
+
     try {
       const { data } = await axios.get(`${getCentralApiBase()}/sso/auth/providers`, {
         timeout: 5000,
@@ -250,6 +268,38 @@ module.exports = {
 
 function getCentralApiBase() {
   return (process.env.PUNCHIN_INTEGRATIONS_API_BASE || 'https://api.punch-in.co.uk').replace(/\/$/, '');
+}
+
+// SsoProvidersFunction (stripe-charge/template.yaml) is also wired behind
+// API Gateway via sso.js, so its handler returns an API-Gateway-proxy-shaped
+// object ({ statusCode, headers, body: JSON.stringify(...) }) rather than
+// the raw provider array - that shape is unchanged whether API Gateway or a
+// direct InvokeCommand calls it, so it has to be unwrapped here.
+async function fetchSsoProvidersViaInvoke() {
+  const functionName = process.env.SSO_PROVIDERS_FUNCTION_NAME;
+  if (!functionName) {
+    strapi.log.error('SSO_PROVIDERS_FUNCTION_NAME is not configured');
+    return [];
+  }
+
+  try {
+    const response = await lambdaClient.send(
+      new InvokeCommand({
+        FunctionName: functionName,
+        InvocationType: 'RequestResponse',
+      })
+    );
+
+    if (response.FunctionError) {
+      throw new Error(`SsoProvidersFunction returned ${response.FunctionError}`);
+    }
+
+    const gatewayResponse = JSON.parse(Buffer.from(response.Payload).toString('utf8'));
+    return JSON.parse(gatewayResponse.body);
+  } catch (err) {
+    strapi.log.error(`Failed to invoke SsoProvidersFunction: ${err.message}`);
+    return [];
+  }
 }
 
 function secretsMatch(provided, expected) {
