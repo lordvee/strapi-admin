@@ -55,19 +55,24 @@ import history from './utils/history';
 
 import plugins from './plugins';
 
-// Retry on 504 (Gateway Timeout): the tenant Lambda backends occasionally hit
-// a concurrent cold-start race (multiple containers contending for the same
-// SQLite file - SQLITE_BUSY) where the Lambda crashes before doing any work
-// at all, surfaced to the browser as a 504. That's almost always transient -
-// a follow-up request a few seconds later succeeds once one container wins.
+// Retry on a gateway error (502/503/504): the tenant Lambda backends
+// occasionally hit a concurrent cold-start race (multiple containers
+// contending for the same SQLite file - SQLITE_BUSY) where the Lambda
+// crashes before doing any work at all - API Gateway surfaces that as a 502
+// (Lambda invocation error) if it fails fast, or a 504 (its own 29s
+// integration timeout) if the crash comes after that. Either way it's almost
+// always transient - a follow-up request a few seconds later succeeds once
+// one container wins. 503 is included too as the generic "backend
+// unavailable" gateway code, though not otherwise observed here.
 //
-// Also retries on a *rejected* fetch, not just a resolved 504: API Gateway's
-// own gateway-generated error responses (this same 504, plus throttles etc.)
-// never reach Strapi, so its CORS middleware never adds the usual headers -
-// the browser then discards the cross-origin response as a CORS failure and
-// fetch() rejects instead of resolving with the status code, invisible to
-// the `response.status === 504` check below. (The per-tenant CloudFormation
-// template's GatewayResponseDefault4xx/5xx now add a CORS header to those
+// Also retries on a *rejected* fetch, not just a resolved gateway-error
+// status: API Gateway's own gateway-generated error responses (these same
+// 502/503/504, plus throttles etc.) never reach Strapi, so its CORS
+// middleware never adds the usual headers - the browser then discards the
+// cross-origin response as a CORS failure and fetch() rejects instead of
+// resolving with the status code, invisible to the `GATEWAY_ERROR_STATUSES`
+// check below. (The per-tenant CloudFormation template's
+// GatewayResponseDefault4xx/5xx now add a CORS header to those
 // gateway-generated responses too, so this should mostly stop happening -
 // this is a second, independent safety net for whatever slips through, e.g.
 // a genuinely dropped connection that never got any response to add headers
@@ -80,13 +85,14 @@ import plugins from './plugins';
 // request() call (and any other direct fetch caller) with zero changes to
 // strapi-helper-plugin or any of its hundreds of call sites.
 //
-// Note: this retries every method, including POST/PUT/DELETE. A 504 (or a
-// rejected fetch) here has only ever been observed as "the Lambda crashed
+// Note: this retries every method, including POST/PUT/DELETE. A gateway
+// error (or a rejected fetch) here has only ever been observed as "the Lambda crashed
 // before it did anything" (see above), not "the write succeeded but the
 // response was lost" - but that's this app's specific failure mode, not a
 // general guarantee, so it's worth knowing if this ever gets reused
 // somewhere with different backend behavior.
 const RETRY_DELAYS_MS = [2000, 4000, 8000];
+const GATEWAY_ERROR_STATUSES = [502, 503, 504];
 const nativeFetch = window.fetch.bind(window);
 
 const attemptFetch = (...args) =>
@@ -100,7 +106,7 @@ window.fetch = async (...args) => {
 
   for (
     let i = 0;
-    (error || response.status === 504) && i < RETRY_DELAYS_MS.length;
+    (error || GATEWAY_ERROR_STATUSES.includes(response.status)) && i < RETRY_DELAYS_MS.length;
     i += 1
   ) {
     await new Promise(resolve => setTimeout(resolve, RETRY_DELAYS_MS[i]));

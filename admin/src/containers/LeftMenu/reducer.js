@@ -1,7 +1,5 @@
 /* eslint-disable consistent-return */
 import produce from 'immer';
-import { SETTINGS_BASE_URL } from '../../config';
-import adminPermissions from '../../permissions';
 import {
   SET_CT_OR_ST_LINKS,
   SET_SECTION_LINKS,
@@ -11,34 +9,12 @@ import {
 
 const initialState = {
   collectionTypesSectionLinks: [],
-  generalSectionLinks: [
-    {
-      icon: 'list',
-      label: 'app.components.LeftMenuLinkContainer.listPlugins',
-      destination: '/list-plugins',
-      isDisplayed: false,
-      permissions: adminPermissions.marketplace.main,
-      notificationsCount: 0,
-    },
-    {
-      icon: 'shopping-basket',
-      label: 'app.components.LeftMenuLinkContainer.installNewPlugin',
-      destination: '/marketplace',
-      isDisplayed: false,
-      permissions: adminPermissions.marketplace.main,
-      notificationsCount: 0,
-    },
-    {
-      icon: 'cog',
-      label: 'app.components.LeftMenuLinkContainer.settings',
-      isDisplayed: false,
-      destination: SETTINGS_BASE_URL,
-      // Permissions of this link are retrieved in the init phase
-      // using the settings menu
-      permissions: [],
-      notificationsCount: 0,
-    },
-  ],
+  // Modules (list-plugins), Marketplace, and Settings links removed from the
+  // left nav's general section - LeftMenu/index.js skips rendering that
+  // section entirely once this is empty, and getGeneralLinks.js's
+  // settings-link lookup already returns [] when it finds none, so this is
+  // a self-contained change with no other call sites to update.
+  generalSectionLinks: [],
   singleTypesSectionLinks: [],
   pluginsSectionLinks: [],
   isLoading: true,

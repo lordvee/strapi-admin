@@ -96,10 +96,7 @@
     {
       "method": "POST",
       "path": "/sso/verify",
-      "handler": "authentication.ssoVerify",
-      "config": {
-        "policies": []
-      }
+      "handler": "authentication.ssoVerify"
     },
     {
       "method": "GET",

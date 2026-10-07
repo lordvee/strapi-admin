@@ -1,5 +1,5 @@
 import React, { useReducer, useEffect } from 'react';
-import { Checkbox, Button, Flex, Padded, Separator } from '@punch-in/buffet-modern-core';
+import { Checkbox, Button, Flex } from '@punch-in/buffet-modern-core';
 import { LoadingIndicator } from '@punch-in/buffet-modern-styles';
 import { useIntl } from 'react-intl';
 import { get } from 'lodash';
@@ -99,31 +99,33 @@ const Login = ({ children, formErrors, modifiedData, onChange, onSubmit, request
             </form>
             {children}
           </Box>
-          {/* SSO Providers Section */}
-          {!isLoading && providers.length > 0 && (
-            <>
-              <Separator />
-              <Padded top bottom size="smd">
-                <BaselineAlignment top size="3px" />
-              </Padded>
-              <div style={{ 
-                background: '#d2e9fe', 
-                padding: '1.4rem', 
-                boxShadow: 'rgb(221, 221, 221) 12px 12px 9px 0px' }}>
-                <Flex flexWrap="wrap" justifyContent="center" alignItems="center">
-                  <div>{formatMessage({ id: 'Auth.components.sso.info' })}: </div>
-                  {providers.map(provider => (
-                    <div key={provider.uid} style={{ padding: '5px 4px' }}>
-                      <ProviderButton provider={provider} />
-                    </div>
-                  ))}
-                </Flex>
-              </div>
-            </>
-          )}
         </BaselineAlignment>
       </Section>
+      {/* Forgot password link, directly below the login form */}
       <AuthLink label="Auth.link.forgot-password" to="/auth/forgot-password" />
+      {/* SSO Providers Section - pinned to the bottom of the viewport */}
+      {!isLoading && providers.length > 0 && (
+        <div
+          style={{
+            position: 'fixed',
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: '#d2e9fe',
+            padding: '1.4rem',
+            boxShadow: 'rgb(221, 221, 221) 0px -6px 9px 0px',
+          }}
+        >
+          <Flex flexWrap="wrap" justifyContent="center" alignItems="center">
+            <div>{formatMessage({ id: 'Auth.components.sso.info' })}: </div>
+            {providers.map(provider => (
+              <div key={provider.uid} style={{ padding: '5px 4px' }}>
+                <ProviderButton provider={provider} />
+              </div>
+            ))}
+          </Flex>
+        </div>
+      )}
     </>
   );
 };

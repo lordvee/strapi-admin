@@ -48,6 +48,10 @@ const Wrapper = styled.div`
       letter-spacing: 0.5;
       vertical-align: baseline;
     }
+
+    &:hover span {
+      color: rgb(247, 91, 29);
+    }
   }
 
   .localeDropdownMenu {

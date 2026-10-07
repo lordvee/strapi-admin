@@ -167,7 +167,10 @@ module.exports = {
       return ctx.badRequest('ValidationError', err);
     }
 
-    strapi.admin.services.auth.forgotPassword(input);
+    // Awaited: in Lambda, un-awaited async work is frozen once the response
+    // returns, so the email send (SES invoke) would often never run. Still
+    // 204 whether or not the address matched an account - no existence leak.
+    await strapi.admin.services.auth.forgotPassword(input);
 
     ctx.status = 204;
   },
