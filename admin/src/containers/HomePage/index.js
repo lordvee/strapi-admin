@@ -15,6 +15,7 @@ import useFetch from './hooks';
 import { ALink, Block, Container, LinkWrapper, P, Wave, Separator } from './components';
 import SocialLink from './SocialLink';
 import PunchInToday from './PunchInToday';
+import RollCall from './RollCall';
 
 const FIRST_BLOCK_LINKS = [
   {
@@ -89,6 +90,7 @@ const HomePage = ({ history: { push } }) => {
       <Container className="container-fluid">
         <div className="row">
           <div className="col-12">
+            <RollCall />
             <PunchInToday />
           </div>
         </div>

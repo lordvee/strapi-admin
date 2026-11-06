@@ -415,4 +415,125 @@ const ApproveBtn = styled.button`
   }
 `;
 
-export { ALink, Block, Container, LinkWrapper, P, Separator, SocialLinkWrapper, Wave, SiteStrip, SiteTab, SiteNav, SiteNavBtn, PunchList, PunchRow, PunchMeta, PunchName, PunchTimes, PunchAction, EmptyPunch, StatusPill, ApproveBtn };
+// Site roll call (RollCall.js) - the safety/security officer's quick view of
+// who is on site. Red so it's findable at a glance in an emergency.
+const RollCallButton = styled.button`
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 44px;
+  padding: 0 20px;
+  margin-bottom: 18px;
+  border: none;
+  border-radius: 4px;
+  background: ${props => (props.$open ? '#9b1c13' : '#d63a2f')};
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 4px 0 #e3e9f3;
+
+  &:hover {
+    background: #b52d23;
+  }
+`;
+
+const RollCallHeader = styled.div`
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+`;
+
+const RollCallSummary = styled.p`
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin: 8px 0 16px;
+  font-size: 14px;
+  color: #5c5f66;
+
+  b {
+    color: #333740;
+  }
+`;
+
+const RefreshBtn = styled.button`
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 12px;
+  border: 1px solid #e3e9f3;
+  border-radius: 4px;
+  background: #ffffff;
+  color: #007eff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: default;
+  }
+`;
+
+const VisitorBadge = styled.span`
+  display: inline-block;
+  margin-left: 8px;
+  padding: 0 7px;
+  border-radius: 9px;
+  background: #fff4e5;
+  color: #b25e00;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 18px;
+  vertical-align: middle;
+`;
+
+const CheckToggle = styled.label`
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: #333740;
+  cursor: pointer;
+  user-select: none;
+
+  input {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    cursor: pointer;
+  }
+`;
+
+const CheckedTag = styled.span`
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 28px;
+  padding: 0 10px;
+  border-radius: 14px;
+  background: #eafbe7;
+  color: #27b97c;
+  font-size: 13px;
+  font-weight: 700;
+`;
+
+const UndoBtn = styled.button`
+  margin-left: 10px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: #007eff;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+`;
+
+export { ALink, Block, Container, LinkWrapper, P, Separator, SocialLinkWrapper, Wave, SiteStrip, SiteTab, SiteNav, SiteNavBtn, PunchList, PunchRow, PunchMeta, PunchName, PunchTimes, PunchAction, EmptyPunch, StatusPill, ApproveBtn, RollCallButton, RollCallHeader, RollCallSummary, RefreshBtn, VisitorBadge, CheckToggle, CheckedTag, UndoBtn };
