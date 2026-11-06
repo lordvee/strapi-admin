@@ -7,6 +7,8 @@ const LinksContainer = styled.div`
   top: ${props => props.theme.main.sizes.leftMenu.height};
   z-index: 20;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
   right: 0;
   bottom: 0;
   left: 0;

@@ -16,6 +16,7 @@ import { ALink, Block, Container, LinkWrapper, P, Wave, Separator } from './comp
 import SocialLink from './SocialLink';
 import PunchInToday from './PunchInToday';
 import RollCall from './RollCall';
+import VisitorApprovals from './VisitorApprovals';
 
 const FIRST_BLOCK_LINKS = [
   {
@@ -91,6 +92,7 @@ const HomePage = ({ history: { push } }) => {
         <div className="row">
           <div className="col-12">
             <RollCall />
+            <VisitorApprovals />
             <PunchInToday />
           </div>
         </div>

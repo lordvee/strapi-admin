@@ -12,6 +12,7 @@ const Title = styled.div`
   font-size: 1.1rem;
   letter-spacing: 0.1rem;
   font-weight: 800;
+  flex-shrink: 0;
   max-height: 26px;
   overflow: hidden;
 `;
