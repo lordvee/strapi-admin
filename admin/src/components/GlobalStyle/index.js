@@ -173,6 +173,25 @@ const GlobalStyle = createGlobalStyle`
   a::-moz-focus-inner {
     border: 0;
   }
+
+  /*
+   * Date picker (react-dates, styled by @punch-in/buffet-modern-styles).
+   * That package colours the weekday names with its near-white "greyIconBkgd"
+   * (#F6F6F9, invisible on a white popup) and shortens the month caption, so the
+   * absolutely positioned weekday header (z-index 2) sits on top of the first row of
+   * dates and swallows their clicks. Fix both here until the package is fixed.
+   */
+  .DayPicker_weekHeader {
+    pointer-events: none;
+  }
+
+  .DayPicker_weekHeader li small {
+    color: #666687 !important;
+  }
+
+  .CalendarMonth_caption {
+    padding-bottom: 52px !important;
+  }
 `;
 
 export default GlobalStyle;
