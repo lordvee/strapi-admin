@@ -192,6 +192,14 @@ const GlobalStyle = createGlobalStyle`
   .CalendarMonth_caption {
     padding-bottom: 52px !important;
   }
+
+  .CalendarDay__default {
+    cursor: pointer;
+  }
+
+  .CalendarDay__blocked_out_of_range {
+    cursor: not-allowed;
+  }
 `;
 
 export default GlobalStyle;
