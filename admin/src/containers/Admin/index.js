@@ -106,6 +106,11 @@ export class Admin extends React.Component {
   };
 
   fetchAppInfo = async () => {
+    // Already provided by `/admin/init` (authenticated page load): no extra request needed.
+    if (!isEmpty(this.props.global.appInfos)) {
+      return;
+    }
+
     try {
       const { data } = await request('/admin/information', { method: 'GET' });
 

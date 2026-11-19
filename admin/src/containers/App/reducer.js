@@ -23,12 +23,21 @@ const initialState = fromJS({
   hasAdminUser: false,
   hasUserPlugin: true,
   isLoading: true,
+  locales: [],
   overlayBlockerData: null,
   plugins: {},
   showGlobalAppBlocker: true,
   strapiVersion: packageVersion,
   uuid: false,
 });
+
+// Same state changes whether the infos come from `/admin/information` or from `/admin/init`
+const applyInfos = (state, infos) =>
+  state
+    .update('appInfos', () => infos)
+    // Keep this for plugins legacy
+    .update('autoReload', () => infos.autoReload)
+    .update('currentEnvironment', () => infos.currentEnvironment);
 
 function appReducer(state = initialState, action) {
   switch (action.type) {
@@ -52,19 +61,17 @@ function appReducer(state = initialState, action) {
       //   console.error('Please delete your `.cache` and `build` folders and restart your app');
       // }
 
-      return (
-        state
-          .update('appInfos', () => action.data)
-          // Keep this for plugins legacy
-          .update('autoReload', () => action.data.autoReload)
-          .update('currentEnvironment', () => action.data.currentEnvironment)
-      );
+      return applyInfos(state, action.data);
     }
     case GET_DATA_SUCCEEDED: {
-      return state
+      const nextState = state
         .update('isLoading', () => false)
         .update('hasAdminUser', () => action.data.hasAdmin)
-        .update('uuid', () => action.data.uuid);
+        .update('uuid', () => action.data.uuid)
+        .update('locales', () => fromJS(action.data.locales || []));
+
+      // `/admin/init` embeds the `/admin/information` payload when the request is authenticated
+      return action.data.information ? applyInfos(nextState, action.data.information) : nextState;
     }
     case PLUGIN_LOADED:
       return state.setIn(['plugins', action.plugin.id], fromJS(action.plugin));
